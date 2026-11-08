@@ -394,6 +394,18 @@ textarea.input{width:100%;resize:vertical;min-height:84px;line-height:1.6}
 @media (max-width:860px){.dv-sum,.rv-grid,.sumbox{grid-template-columns:1fr 1fr}.dv-area{right:64px}.dv-mk-col{width:58px}.masonry{columns:1}
   .side{overflow-x:auto;justify-content:flex-start}.nav{min-width:62px;width:auto;flex:none}}
 
+/* drag & resize */
+.ev{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.ev.dragging{cursor:grabbing;z-index:20;box-shadow:0 12px 28px rgba(20,30,70,.28);opacity:.95;transform:none;outline:2px solid var(--ec);transition:none}
+.ev-rs{position:absolute;left:0;right:0;bottom:0;height:8px;cursor:ns-resize;touch-action:none}
+.ev-rs:after{content:"";position:absolute;left:50%;bottom:2px;width:26px;height:3px;margin-left:-13px;border-radius:3px;background:var(--ec);opacity:.35;transition:opacity .15s}
+.ev:hover .ev-rs:after,.ev.dragging .ev-rs:after{opacity:.9}
+.ev.locked{cursor:pointer}
+.drag-bub{position:absolute;z-index:30;pointer-events:none;background:var(--text);color:var(--panel);font-size:12px;font-weight:600;padding:3px 9px;border-radius:8px;white-space:nowrap;font-variant-numeric:tabular-nums;box-shadow:var(--shadow);transform:translateY(-120%)}
+.dv-hint{font-size:12px;color:var(--faint);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.dv-hint kbd{font:inherit;border:1px solid var(--line);border-radius:5px;padding:0 5px;background:var(--panel-2);color:var(--muted)}
+body.dv-dragging,body.dv-dragging *{cursor:grabbing!important}
+body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
 /* responsive */
 @media (max-width:1180px){
   .hero{grid-template-columns:1fr 1fr}.greet{grid-column:1/-1}
@@ -425,7 +437,7 @@ textarea.input{width:100%;resize:vertical;min-height:84px;line-height:1.6}
   <aside class="side">
     <div class="logo">
       <div class="logo-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2.5 2.5L16 13"/></svg></div>
-      <div><b>今日不鸽</b><small>DayDeck · AI 每日工作台</small></div>
+      <div><b>今日不鸽</b><small>DayDeck · AI 工作台</small></div>
     </div>
     <button class="nav" data-view="overview"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg><span>今日总览</span></button>
     <button class="nav" data-view="timeline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M8 14h4M8 17h7"/></svg><span>日程</span></button>
@@ -1013,7 +1025,7 @@ function renderPomo(){
 // ---------- 日视图时间轴（课程 / 日程 / 待办 / AI 排程 / 用餐 / 久坐） ----------
 const DV_START=6,DV_END=24,PX=1;
 const WD_N=['','一','二','三','四','五','六','日'];
-function coursesOn(date){const wd=wdOf(new Date(date+'T00:00:00'));return S.courses.filter(c=>(c.days||[]).includes(wd))}
+function coursesOn(date){const wd=wdOf(new Date(date+'T00:00:00'));const ov=S.courseOv||{};return S.courses.filter(c=>(c.days||[]).includes(wd)).map(c=>{const o=ov[date+'|'+c.id];return o?{...c,start:o.start,end:o.end,ov:true}:c})}
 const TYPE={course:{n:'课程',c:'var(--c-course)'},event:{n:'日程',c:'var(--c-research)'},todo:{n:'待办',c:'var(--q1)'},plan:{n:'AI 排程',c:'var(--brand-2)'},meal:{n:'用餐',c:'#eab308'},rest:{n:'休息',c:'var(--c-life)'}};
 const TI={
   course:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/>',
@@ -1028,9 +1040,9 @@ const tic=(k,sz=12)=>`<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill
 const MEAL_DUR={breakfast:20,lunch:40,dinner:40};
 function dayItems(date){
   const out=[];
-  coursesOn(date).forEach(c=>out.push({type:'course',id:c.id,title:c.name,sub:c.place,s:toMin(c.start),e:toMin(c.end),c:TYPE.course.c}));
+  coursesOn(date).forEach(c=>out.push({type:'course',id:c.id,title:c.name+(c.ov?'（今日调整）':''),sub:c.place,s:toMin(c.start),e:toMin(c.end),c:TYPE.course.c}));
   S.events.filter(e=>e.date===date).forEach(e=>{const s=toMin(e.start);out.push({type:'event',id:e.id,title:e.title,sub:CATS[e.cat].n+' · Q'+e.q,s,e:s+(+e.dur||60),c:CATS[e.cat].c})});
-  S.todos.filter(t=>t.due===date&&t.time).forEach(t=>{const s=toMin(t.time);out.push({type:'todo',id:t.id,title:t.text,sub:'待办 · '+QUADS[t.q].n+(t.done?' · 已完成':''),s,e:s+60,c:CATS[t.cat].c,done:t.done})});
+  S.todos.filter(t=>t.due===date&&t.time).forEach(t=>{const s=toMin(t.time);out.push({type:'todo',id:t.id,title:t.text,sub:'待办 · '+QUADS[t.q].n+(t.done?' · 已完成':''),s,e:s+(+t.dur||60),c:CATS[t.cat].c,done:t.done})});
   if(S.plan&&S.plan.date===date)S.plan.blocks.filter(b=>b.kind!=='meal').forEach(b=>{const rest=b.kind==='rest';out.push({type:rest?'rest':'plan',id:b.id,title:b.title,sub:rest?'起身活动':b.sub,s:toMin(b.start),e:toMin(b.end),c:rest?TYPE.rest.c:b.kind==='focus'?'var(--danger)':TYPE.plan.c})});
   if(S.meals.on)['breakfast','lunch','dinner'].forEach(k=>{const s=toMin(S.meals[k]);out.push({type:'meal',id:k,title:SLOT_N[k],sub:mealPick(k)[0],s,e:s+MEAL_DUR[k],c:TYPE.meal.c})});
   return out.sort((a,b)=>a.s-b.s||b.e-a.e);
@@ -1079,13 +1091,13 @@ function renderDayView(el,date,h,compact){
     const top=(i.s-DV_START*60)*PX,ht=Math.max(16,(i.e-i.s)*PX-2);const short=(i.e-i.s)<40;
     const past=isToday&&i.e<=n;const cf=confIds.has(i.type+i.id);
     const w=100/i.ncol;
-    return `<div class="ev ${short?'short':''} ${past||i.done?'past':''} ${cf?'conflict':''}" data-type="${i.type}" data-id="${i.id}" title="${esc(i.title)} ${fmtT(i.s)}-${fmtT(i.e)}" style="--ec:${i.c};top:${top}px;height:${ht}px;left:calc(${i.col*w}% + 1px);width:calc(${w}% - 3px)"><b>${tic(i.type==='todo'?'todo':i.type)}${cf?'<span class="cf">!</span>':''}${esc(i.title)}</b><div class="et">${fmtT(i.s)}–${fmtT(i.e)} · ${i.e-i.s}分钟${!short&&i.sub?' · '+esc(i.sub):''}</div></div>`}).join('');
+    return `<div class="ev ${short?'short':''} ${past||i.done?'past':''} ${cf?'conflict':''}" data-type="${i.type}" data-id="${i.id}" data-s="${i.s}" data-e="${i.e}" title="${esc(i.title)} ${fmtT(i.s)}-${fmtT(i.e)}（拖动改时间，拖底边改时长）" style="--ec:${i.c};top:${top}px;height:${ht}px;left:calc(${i.col*w}% + 1px);width:calc(${w}% - 3px)"><b>${tic(i.type==='todo'?'todo':i.type)}${cf?'<span class="cf">!</span>':''}${esc(i.title)}</b><div class="et">${fmtT(i.s)}–${fmtT(i.e)} · ${i.e-i.s}分钟${!short&&i.sub?' · '+esc(i.sub):''}</div>${i.type!=='meal'?'<div class="ev-rs" title="拖动调整时长"></div>':''}</div>`}).join('');
   let mks='';
   S.alarms.filter(a=>a.on).forEach(a=>{const m=toMin(a.time);if(m>=DV_START*60)mks+=`<div class="mk alarm" style="top:${(m-DV_START*60)*PX}px" title="${esc(a.text)}">${tic('bell',10)}${a.time}</div>`});
   if(isToday&&S.sit.on&&!demo){let t=S.sit.last+S.sit.interval*60000,k=0;const end=new Date();end.setHours(23,0,0,0);while(t<end.getTime()&&k<10){const d=new Date(t);const m=d.getHours()*60+d.getMinutes();if(m>=DV_START*60)mks+=`<div class="mk sit" style="top:${(m-DV_START*60)*PX}px" title="久坐提醒：起身活动">${tic('rest',10)}起身 ${hm(d)}</div>`;t+=S.sit.interval*60000;k++}}
   const nowL=isToday&&n>=DV_START*60?`<div class="now-line" style="top:${(n-DV_START*60)*PX}px"><span>${hm()}</span></div>`:'';
   const old=el.querySelector('.dv-scroll');const keep=old?old.scrollTop:null;
-  el.innerHTML=`<div class="dv-wrap">${sumHtml}${warn}<div class="dv-scroll" style="height:${h}px"><div class="dv-grid" style="height:${H+12}px;margin-top:10px">${grid}<div class="dv-area">${evs}</div><div class="dv-mk-col">${mks}</div>${nowL}</div></div></div>`;
+  el.innerHTML=`<div class="dv-wrap">${sumHtml}${warn}<div class="dv-hint">${tic('event',12)}拖动块改时间，拖底边改时长 · 吸附 5 分钟（按住 <kbd>Shift</kbd> 吸附 15 分钟）· 轻点块可编辑</div><div class="dv-scroll" style="height:${h}px"><div class="dv-grid" style="height:${H+12}px;margin-top:10px">${grid}<div class="dv-area">${evs}</div><div class="dv-mk-col">${mks}</div>${nowL}</div></div></div>`;
   const sc=el.querySelector('.dv-scroll');
   if(keep!==null&&el.dataset.date===date){sc.style.scrollBehavior='auto';sc.scrollTop=keep;sc.style.scrollBehavior=''}
   else{sc.style.scrollBehavior='auto';sc.scrollTop=isToday?Math.max(0,(n-DV_START*60)*PX-h*0.3):(8-DV_START)*60*PX-10;sc.style.scrollBehavior=''}
@@ -1094,6 +1106,7 @@ function renderDayView(el,date,h,compact){
 function scrollDayNow(){$$('.dv-scroll').forEach(sc=>{const el=sc.closest('#ovDay,#tlDay');const date=el&&el.dataset.date;if(date!==dstr())return;sc.scrollTop=Math.max(0,(nowMin()-DV_START*60)*PX-sc.clientHeight*0.3)})}
 let dvDate=dstr();
 function renderTimeline(){
+  if(DR)return; // 拖拽中不重绘
   renderDayView($('#ovDay'),dstr(),560,true);
   renderDayView($('#tlDay'),dvDate,640);
   const d=new Date(dvDate+'T00:00:00');const isT=dvDate===dstr();
@@ -1117,7 +1130,60 @@ $('#courseForm2').onsubmit=e=>{e.preventDefault();const f=e.target;const days=$$
   S.courses.push({id:uid(),name:f.name.value.trim(),place:f.place.value.trim(),start:f.start.value,end:f.end.value,days});save();f.name.value='';f.place.value='';renderAll();toast('课程已加入课表')};
 $('#courseList').onclick=e=>{const li=e.target.closest('[data-course]');if(li)openCourseEditor(S.courses.find(c=>c.id===li.dataset.course))};
 $('#eventList').onclick=e=>{const li=e.target.closest('[data-event]');if(li)openEventEditor(S.events.find(x=>x.id===li.dataset.event))};
-document.addEventListener('click',e=>{const b=e.target.closest('.ev[data-type]');if(b)openItem(b.dataset.type,b.dataset.id)});
+// ---- 拖拽改时间 / 拉伸改时长（Pointer Events：鼠标 + 触屏） ----
+let DR=null;
+const DV_MIN=DV_START*60,DV_MAX=DV_END*60;
+document.addEventListener('pointerdown',e=>{
+  if(e.button>0)return;const b=e.target.closest('.ev[data-type]');if(!b)return;
+  const wrap=b.closest('#ovDay,#tlDay');if(!wrap)return;
+  const mode=e.target.closest('.ev-rs')?'resize':'move';
+  DR={b,wrap,date:wrap.dataset.date,type:b.dataset.type,id:b.dataset.id,s0:+b.dataset.s,e0:+b.dataset.e,y0:e.clientY,sc0:b.closest('.dv-scroll').scrollTop,mode,moved:false,pid:e.pointerId};
+  DR.s=DR.s0;DR.e=DR.e0;
+  try{b.setPointerCapture(e.pointerId)}catch(_){}
+});
+document.addEventListener('pointermove',e=>{
+  if(!DR||e.pointerId!==DR.pid)return;
+  const sc=DR.b.closest('.dv-scroll');
+  // 靠近边缘时自动滚动
+  const r=sc.getBoundingClientRect();if(DR.moved){if(e.clientY<r.top+30)sc.scrollTop-=8;else if(e.clientY>r.bottom-30)sc.scrollTop+=8}
+  const dy=e.clientY-DR.y0+(sc.scrollTop-DR.sc0);
+  if(!DR.moved){if(Math.abs(e.clientY-DR.y0)<=4)return;DR.moved=true;DR.b.classList.add('dragging');document.body.classList.add(DR.mode==='resize'?'dv-resizing':'dv-dragging');
+    DR.bub=document.createElement('div');DR.bub.className='drag-bub';DR.b.parentNode.appendChild(DR.bub)}
+  e.preventDefault();
+  const snap=e.shiftKey?15:5;const d=Math.round(dy/PX/snap)*snap;const len=DR.e0-DR.s0;
+  if(DR.mode==='move'||DR.type==='meal'){let ns=Math.round((DR.s0+d)/snap)*snap;ns=Math.max(DV_MIN,Math.min(DV_MAX-len,ns));DR.s=ns;DR.e=ns+len}
+  else{let ne=Math.round((DR.e0+d)/snap)*snap;ne=Math.max(DR.s0+15,Math.min(DV_MAX,ne));DR.s=DR.s0;DR.e=ne}
+  DR.b.style.top=((DR.s-DV_MIN)*PX)+'px';DR.b.style.height=Math.max(16,(DR.e-DR.s)*PX-2)+'px';
+  const et=DR.b.querySelector('.et');if(et)et.textContent=`${fmtT(DR.s)}–${fmtT(DR.e)} · ${DR.e-DR.s}分钟`;
+  DR.bub.textContent=`${fmtT(DR.s)} – ${fmtT(DR.e)} · ${DR.e-DR.s} 分钟`;
+  DR.bub.style.top=((DR.s-DV_MIN)*PX)+'px';DR.bub.style.left=DR.b.style.left;
+},{passive:false});
+function endDrag(e,cancel){
+  if(!DR||(e&&e.pointerId!==DR.pid))return;const d=DR;DR=null;
+  document.body.classList.remove('dv-dragging','dv-resizing');if(d.bub)d.bub.remove();
+  if(!d.moved){if(!cancel)openItem(d.type,d.id);return}
+  if(cancel||(d.s===d.s0&&d.e===d.e0)){renderTimeline();return}
+  commitBlock(d.type,d.id,d.date,d.s,d.e);
+}
+document.addEventListener('pointerup',e=>endDrag(e,false));
+document.addEventListener('pointercancel',e=>endDrag(e,true));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&DR)endDrag(null,true)});
+function commitBlock(type,id,date,s,e,scope){
+  const st=fmtT(s),en=fmtT(e),done=msg=>{save();renderAll();toast(msg||`已调整为 ${st}–${en}（${e-s} 分钟）`)};
+  if(type==='event'){const v=S.events.find(x=>x.id===id);if(!v)return;v.start=st;v.dur=e-s;return done()}
+  if(type==='todo'){const t=S.todos.find(x=>x.id===id);if(!t)return;t.time=st;t.dur=e-s;return done()}
+  if(type==='plan'||type==='rest'){const b=S.plan&&S.plan.blocks.find(x=>x.id===id);if(!b)return;b.start=st;b.end=en;return done()}
+  if(type==='meal'){S.meals[id]=st;if(S.meals.fired)delete S.meals.fired[id];return done(`${SLOT_N[id]}提醒改为 ${st}`)}
+  if(type==='course'){const c=S.courses.find(x=>x.id===id);if(!c)return;
+    const apply=sc=>{if(sc==='all'){c.start=st;c.end=en;if(S.courseOv)delete S.courseOv[date+'|'+id];done(`「${c.name}」每周时间改为 ${st}–${en}`)}else{S.courseOv=S.courseOv||{};S.courseOv[date+'|'+id]={start:st,end:en};done(`「${c.name}」仅本次调整为 ${st}–${en}`)}};
+    if(scope)return apply(scope);
+    // 先预览新位置，再询问范围
+    showModal({title:'调整课程时间',icon:ICW('course'),color:'linear-gradient(135deg,#3b82f6,#4f6bff)',html:`「${esc(c.name)}」是按周重复的课程<div class="hl">${c.start}–${c.end} → ${st}–${en}</div>`,
+      actions:[{label:'取消',onClick:()=>renderTimeline()},{label:'所有周',onClick:()=>apply('all')},{label:'仅这一天',primary:true,onClick:()=>apply('day')}]});
+  }
+}
+// 录屏 / 脚本用：DayDeck.moveBlock('event', id, '13:40', 60)
+function moveBlock(type,id,start,dur,scope){const it=dayItems(dvDate).find(i=>i.type===type&&i.id===id)||dayItems(dstr()).find(i=>i.type===type&&i.id===id);const s=toMin(start);const len=dur||(it?it.e-it.s:60);commitBlock(type,id,dvDate,s,s+len,scope||'day')}
 const ICW=k=>tic(k,30).replace('currentColor','#fff');
 function openEventEditor(ev){
   const v=ev||{title:'',date:dvDate||dstr(),start:pad(Math.min(22,new Date().getHours()+1))+':00',dur:60,cat:'meeting',q:2};
@@ -1534,7 +1600,7 @@ function renderAll(){renderAI();renderNotes();renderDiary();renderReview();rende
 applyTheme();renderAll();updNotif();
 go(location.hash.slice(1)||S.view||'overview');
 tick();setInterval(tick,250);
-window.DayDeck={get S(){return S},scrollDayNow,postTodo,histDay,setDemo,demoFire,go,togglePomo,P,aiPlan:()=>runPlan(),parseNL};
+window.DayDeck={get S(){return S},moveBlock,dayItems,scrollDayNow,postTodo,histDay,setDemo,demoFire,go,togglePomo,P,aiPlan:()=>runPlan(),parseNL};
 })();
 </script>
 </body>
