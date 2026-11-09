@@ -463,8 +463,8 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
 .ev.habit b{font-size:11.5px;font-weight:600;color:var(--muted)}
 .ev.habit.checked{background:color-mix(in srgb,var(--ec) 14%,transparent);border-style:solid}
 .ev.habit.checked b{color:var(--text)}
-.ev[data-type=exam]{background:repeating-linear-gradient(135deg,color-mix(in srgb,#dc2626 16%,var(--panel)) 0 8px,color-mix(in srgb,#dc2626 9%,var(--panel)) 8px 16px);border-left-width:5px;box-shadow:0 0 0 1px color-mix(in srgb,#dc2626 40%,transparent) inset}
-.ev[data-type=exam] b{color:#dc2626}
+.ev[data-type=exam]{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--ec) 16%,var(--panel)) 0 8px,color-mix(in srgb,var(--ec) 9%,var(--panel)) 8px 16px);border-left-width:5px;box-shadow:0 0 0 1px color-mix(in srgb,var(--ec) 40%,transparent) inset}
+.ev[data-type=exam] b{color:var(--ec)}
 /* stars */
 .star-btn{border:0;background:none;color:var(--faint);padding:2px;border-radius:6px;display:inline-grid;place-items:center;opacity:.55}
 .star-btn:hover{opacity:1;color:#eab308}
@@ -513,7 +513,7 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
 .mv-gut{font-size:11px;color:var(--faint);text-align:right;padding:6px 6px 0 0}
 .mv-adc{display:flex;flex-direction:column;gap:3px;padding:4px 3px;border-left:1px solid var(--line);min-width:0}
 .ad-chip{font-size:11px;padding:2px 6px;border-radius:6px;background:color-mix(in srgb,var(--ec) 15%,var(--panel));border-left:3px solid var(--ec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
-.ad-chip.ddl{--ec:#f97316;font-weight:600;color:#c2410c;display:flex;align-items:center;gap:3px}
+.ad-chip.ddl{font-weight:600;color:color-mix(in srgb,var(--ec) 78%,var(--text));display:flex;align-items:center;gap:3px}
 .ad-chip.ddl.done{opacity:.5;text-decoration:line-through}
 .mv-grid{position:relative;margin-top:10px}
 .mv-cols{position:absolute;left:56px;right:0;top:0;bottom:0;display:grid;grid-template-columns:repeat(var(--n),1fr)}
@@ -538,14 +538,14 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
 .mo-star{font-size:11px;font-weight:700;color:#b45309;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mo-it{display:flex;align-items:center;gap:4px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
 .mo-it i{width:6px;height:6px;border-radius:2px;background:var(--ec);flex:none}
-.mo-it.exam{color:#dc2626;font-weight:700}
-.mo-it.ddl{color:#c2410c;font-weight:600}
+.mo-it.exam{color:var(--ec);font-weight:700}
+.mo-it.ddl{color:color-mix(in srgb,var(--ec) 80%,var(--text));font-weight:600}
 .mo-it.ddl i{border-radius:0;width:3px;height:10px}
 .mo-more{font-size:10.5px;color:var(--faint)}
 .mo-full{margin-top:auto;font-size:10.5px;font-weight:700;color:var(--danger)}
 /* ddl line on timeline */
-.ddl-line{position:absolute;right:0;height:0;border-top:2px dashed #f97316;z-index:7;cursor:pointer}
-.ddl-line span{position:absolute;right:2px;top:-19px;font-size:10.5px;font-weight:700;color:#fff;background:#f97316;padding:1px 6px;border-radius:5px;white-space:nowrap;max-width:96%;overflow:hidden;text-overflow:ellipsis;display:inline-flex;align-items:center;gap:3px}
+.ddl-line{position:absolute;right:0;height:0;border-top:2px dashed var(--dc,#f97316);z-index:7;cursor:pointer}
+.ddl-line span{position:absolute;right:2px;top:-19px;font-size:10.5px;font-weight:700;color:#fff;background:var(--dc,#f97316);padding:1px 6px;border-radius:5px;white-space:nowrap;max-width:96%;overflow:hidden;text-overflow:ellipsis;display:inline-flex;align-items:center;gap:3px}
 .ddl-line.over{border-top-color:#ef4444}.ddl-line.over span{background:#ef4444}
 .mv-col .ddl-line span{font-size:9.5px;top:-16px;left:2px;right:auto}
 /* 不鸽榜 */
@@ -595,6 +595,28 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
 @media (max-width:1180px){.gv-wrap,.dl-wrap{grid-template-columns:1fr}.hb-grid{grid-template-columns:1fr}}
 @media (max-width:860px){.hb-stats{grid-template-columns:1fr 1fr}.mo-cell{min-height:64px;padding:4px}.mo-it,.mo-star,.mo-more{display:none}.dl-card{flex-wrap:wrap}.dl-side{flex-direction:row;align-items:center;flex-wrap:wrap;min-width:0;width:100%}.cs-row{grid-template-columns:10px 70px 1fr 30px 36px}.hb-today{grid-template-columns:1fr}.board{grid-template-columns:1fr 1fr;gap:8px}.bg-chip{padding:10px 10px 12px}.bg-cd{font-size:15px}}
 
+/* v7: 数据管理 / 欢迎条 / 类型 */
+.welcome{display:none}
+.welcome.on{display:flex;align-items:center;gap:10px;padding:10px 14px;margin-bottom:16px;border-radius:14px;background:linear-gradient(120deg,color-mix(in srgb,#0ea5e9 14%,var(--panel)),color-mix(in srgb,var(--brand) 12%,var(--panel)));border:1px solid color-mix(in srgb,#0ea5e9 35%,transparent);font-size:13px;color:var(--text)}
+.welcome.on>svg{color:#0ea5e9;flex:none}
+.welcome.on span{flex:1}
+.dm-counts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:14px 0}
+.dm-counts div{background:var(--panel-2);border-radius:12px;padding:8px 10px;text-align:center}
+.dm-counts b{display:block;font-size:18px}
+.dm-counts span{font-size:11.5px;color:var(--muted)}
+.dm-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dm-opt{border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--muted)}
+.dm-opt p{margin:6px 0 8px}
+.dm-opt.danger{border-color:color-mix(in srgb,var(--danger) 40%,transparent);background:color-mix(in srgb,var(--danger) 5%,var(--panel))}
+.dm-h{display:flex;align-items:center;gap:6px;color:var(--text);font-size:14px}
+.dm-opt.danger .dm-h{color:var(--danger)}
+.icon-btn.m-only{display:none}
+.side-data{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.side-data .btn{justify-content:center;padding:6px 8px;font-size:12.5px}
+.empty a{color:var(--brand);cursor:pointer;font-weight:600;text-decoration:none}
+.empty a:hover{text-decoration:underline}
+.tdot{display:inline-block;width:7px;height:7px;border-radius:50%;flex:none}
+@media (max-width:860px){.dm-counts{grid-template-columns:repeat(3,1fr)}.dm-opts{grid-template-columns:1fr}}
 /* responsive */
 @media (max-width:1180px){
   .hero{grid-template-columns:1fr 1fr}.greet{grid-column:1/-1}
@@ -604,6 +626,7 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
   .app{grid-template-columns:1fr}
   .side{position:fixed;top:auto;bottom:0;left:0;right:0;height:auto;flex-direction:row;padding:6px 8px calc(6px + env(safe-area-inset-bottom));border-right:0;border-top:1px solid var(--line);z-index:30;justify-content:space-around;gap:2px}
   .logo,.side-foot{display:none}
+  .icon-btn.m-only{display:grid}
   .nav{flex-direction:column;gap:2px;font-size:11px;padding:6px 4px;align-items:center;text-align:center}
   .nav .badge{display:none}
   main{padding:16px 16px 96px}
@@ -646,17 +669,17 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
         <div class="row between"><b style="font-size:13px">演示模式</b><label class="switch"><input type="checkbox" id="demoToggle"><span></span></label></div>
         <p>开启后时间加速 60 倍（1 分钟 = 1 秒），并可一键预览各类提醒弹窗。</p>
       </div>
-      <button class="btn sm ghost" data-catmgr="1" style="justify-content:center">分类管理</button>
-      <button class="btn sm ghost" id="resetBtn" style="justify-content:center">恢复示例数据</button>
+      <div class="side-data"><button class="btn sm ghost" data-catmgr="1" title="管理事项分类">分类管理</button><button class="btn sm" id="resetBtn" title="清空数据 / 恢复示例数据"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>数据管理</button></div>
     </div>
   </aside>
 
   <main>
+    <div class="welcome" id="welcome"></div>
     <div class="topbar">
       <div><h1 id="pageTitle">今日总览</h1><div class="sub" id="pageSub"></div></div>
       <div class="top-actions">
         <div class="clock" id="clock">--:--:--</div>
-        <button class="icon-btn" id="themeBtn" title="切换主题"></button>
+        <button class="icon-btn m-only" data-dm="1" title="数据管理（清空 / 恢复示例）"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></button><button class="icon-btn" id="themeBtn" title="切换主题"></button>
       </div>
     </div>
 
@@ -815,7 +838,7 @@ body.dv-resizing,body.dv-resizing *{cursor:ns-resize!important}
     <!-- 不鸽榜 -->
     <section class="view" id="view-deadline">
       <div class="card" style="margin-bottom:16px;padding:16px 18px">
-        <div class="row between" style="flex-wrap:wrap;gap:12px"><div class="dv-sum" id="dlStats" style="flex:1;min-width:300px"></div><div class="row"><button class="btn" id="examAdd">+ 考试</button><button class="btn primary" id="ddlAdd">+ DDL</button></div></div>
+        <div class="row between" style="flex-wrap:wrap;gap:12px"><div class="dv-sum" id="dlStats" style="flex:1;min-width:300px"></div><div class="row"><button class="btn" data-typemgr="ddl">管理类型</button><button class="btn" id="examAdd">+ 考试</button><button class="btn primary" id="ddlAdd">+ DDL</button></div></div>
         <div id="dlFilters" style="display:flex;flex-direction:column;gap:8px;margin-top:12px"></div>
       </div>
       <div class="dl-wrap">
@@ -1162,7 +1185,7 @@ function seed(){
     ],
     sit:{on:true,interval:45,last:now-28*60000},
     meals:{on:true,breakfast:'07:30',lunch:'11:50',dinner:'17:50',fired:{}},
-    mealIdx:0, filter:'all', view:'overview'
+    mealIdx:0, filter:'all', view:'overview', sample:true
   };
 }
 let S;
@@ -1323,7 +1346,8 @@ const TI={
   bell:'<path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>',
   habit:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/>',
   exam:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
-  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>'
+  flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 11v6M14 11v6"/>'
 };
 const tic=(k,sz=12)=>`<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${TI[k]}</svg>`;
 const MEAL_DUR={breakfast:20,lunch:40,dinner:40};
@@ -1331,7 +1355,7 @@ function dayItems(date){
   const out=[];
   coursesOn(date).forEach(c=>out.push({type:'course',id:c.id,title:c.name+(c.ov?'（今日调整）':''),sub:c.place,s:toMin(c.start),e:toMin(c.end),c:TYPE.course.c}));
   S.events.filter(e=>e.date===date).forEach(e=>{const s=toMin(e.start);out.push({type:'event',id:e.id,title:e.title,sub:CATS[e.cat].n+' · Q'+e.q,s,e:s+(+e.dur||60),c:CATS[e.cat].c})});
-  examsOn(date).forEach(x=>{const s=toMin(x.start||'09:00');out.push({type:'exam',id:x.id,title:'考试 · '+x.subject+'（'+x.kind+'）',sub:(x.place||'')+(x.seat?' · 座位 '+x.seat:''),s,e:s+(+x.dur||120),c:'#dc2626'})});
+  examsOn(date).forEach(x=>{const s=toMin(x.start||'09:00');out.push({type:'exam',id:x.id,title:'考试 · '+x.subject+'（'+typeLabel('exam',x.kind)+'）',sub:(x.place||'')+(x.seat?' · 座位 '+x.seat:''),s,e:s+(+x.dur||120),c:typeOf('exam',x.kind).c})});
   (S.habits||[]).filter(h=>h.onTl&&h.time&&habitDue(h,date)).forEach(h=>{const s=toMin(h.time),l=hLog(h,date);out.push({type:'habit',id:h.id,title:(l?'已打卡 · ':'打卡 · ')+h.name,sub:l?l.t+' 完成':'点击打卡',s,e:s+Math.max(15,+h.dur||15),c:h.c,hdone:!!l})});
   S.todos.filter(t=>t.due===date&&t.time).forEach(t=>{const s=toMin(t.time);out.push({type:'todo',id:t.id,title:t.text,sub:'待办 · '+QUADS[t.q].n+(t.done?' · 已完成':''),s,e:s+(+t.dur||60),c:CATS[t.cat].c,done:t.done})});
   if(S.plan&&S.plan.date===date)S.plan.blocks.filter(b=>b.kind!=='meal').forEach(b=>{const rest=b.kind==='rest';out.push({type:rest?'rest':'plan',id:b.id,title:b.title,sub:rest?'起身活动':b.sub,s:toMin(b.start),e:toMin(b.end),c:rest?TYPE.rest.c:b.kind==='focus'?'var(--danger)':TYPE.plan.c})});
@@ -1406,9 +1430,9 @@ function renderTimeline(){
   $('#dvDateLbl').textContent=`${d.getMonth()+1} 月 ${d.getDate()} 日 星期${WD_N[wdOf(d)]}${isT?' · 今天':''}`;
   $('#dvLegend').innerHTML=Object.values(TYPE).map(t=>`<span style="--ec:${t.c}"><i></i>${t.n}</span>`).join('')+`<span style="--ec:#ea4335"><i style="height:2px"></i>当前时间</span>`;
   const cs=[...S.courses].sort((a,b)=>(a.days[0]||9)-(b.days[0]||9)||a.start.localeCompare(b.start));
-  $('#courseList').innerHTML=cs.map(c=>`<li data-course="${c.id}" style="--ec:var(--c-course)"><span class="bar-c"></span><div class="grow"><b>${esc(c.name)}</b><small>周${c.days.map(x=>WD_N[x]).join('、')} · ${c.start}-${c.end}${c.place?' · '+esc(c.place):''}</small></div></li>`).join('')||'<div class="empty">还没有课程</div>';
+  $('#courseList').innerHTML=cs.map(c=>`<li data-course="${c.id}" style="--ec:var(--c-course)"><span class="bar-c"></span><div class="grow"><b>${esc(c.name)}</b><small>周${c.days.map(x=>WD_N[x]).join('、')} · ${c.start}-${c.end}${c.place?' · '+esc(c.place):''}</small></div></li>`).join('')||'<div class="empty">还没有课程，<a data-focus="#courseForm2 input">点这里添加课表</a></div>';
   const today=dstr();const evs=S.events.filter(e=>e.date>=today).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start));
-  $('#eventList').innerHTML=evs.map(e=>{const dd=new Date(e.date+'T00:00:00');return `<li data-event="${e.id}" style="--ec:${CATS[e.cat].c}"><span class="bar-c"></span><div class="grow"><b>${esc(e.title)}</b><small>${e.date===today?'今天':(dd.getMonth()+1)+'/'+dd.getDate()+' 周'+WD_N[wdOf(dd)]} ${e.start} · ${e.dur} 分钟 · ${CATS[e.cat].n} · Q${e.q}</small></div></li>`}).join('')||'<div class="empty">暂无即将到来的日程</div>';
+  $('#eventList').innerHTML=evs.map(e=>{const dd=new Date(e.date+'T00:00:00');return `<li data-event="${e.id}" style="--ec:${CATS[e.cat].c}"><span class="bar-c"></span><div class="grow"><b>${esc(e.title)}</b><small>${e.date===today?'今天':(dd.getMonth()+1)+'/'+dd.getDate()+' 周'+WD_N[wdOf(dd)]} ${e.start} · ${e.dur} 分钟 · ${CATS[e.cat].n} · Q${e.q}</small></div></li>`}).join('')||'<div class="empty">暂无即将到来的日程，<a data-focus="#eventForm input">点这里添加</a></div>';
 }
 $('#dvPrev').onclick=()=>{dvDate=dstr(addDays(new Date(dvDate+'T00:00:00'),-1));renderTimeline()};
 $('#dvNext').onclick=()=>{dvDate=dstr(addDays(new Date(dvDate+'T00:00:00'),1));renderTimeline()};
@@ -1541,7 +1565,7 @@ function renderMatrix(){
   const list=S.todos.filter(t=>S.filter==='all'||t.cat===S.filter);
   $('#matrix').innerHTML=[1,2,3,4].map(q=>{
     const items=list.filter(t=>t.q===q).sort((a,b)=>a.done-b.done);const Q=QUADS[q];const left=items.filter(t=>!t.done).length;
-    return `<div class="card quad" data-q="${q}" style="--qc:${Q.c}"><div class="card-head"><div class="q-title"><span class="q-badge">Q${q}</span><b>${Q.n}</b><span class="q-hint">· ${Q.h}</span></div><span class="count">${left} 项未完成</span></div><ul class="todo">${items.map(t=>todoLi(t,{drag:true})).join('')||'<div class="empty">拖拽待办到这里</div>'}</ul></div>`}).join('');
+    return `<div class="card quad" data-q="${q}" style="--qc:${Q.c}"><div class="card-head"><div class="q-title"><span class="q-badge">Q${q}</span><b>${Q.n}</b><span class="q-hint">· ${Q.h}</span></div><span class="count">${left} 项未完成</span></div><ul class="todo">${items.map(t=>todoLi(t,{drag:true})).join('')||(S.todos.length?'<div class="empty">拖拽待办到这里</div>':'<div class="empty">还没有待办，<a data-focus="#todoForm input">点这里添加</a></div>')}</ul></div>`}).join('');
 }
 function toggleTodo(id){const t=S.todos.find(x=>x.id===id);if(!t)return;t.done=!t.done;histMark(t);save();renderAll();if(t.done){const d=S.todos.filter(x=>x.done).length;toast(`完成「${t.text.slice(0,14)}」· 今日进度 ${Math.round(d/S.todos.length*100)}%`)}}
 function delTodo(id){const t=S.todos.find(x=>x.id===id);S.todos=S.todos.filter(x=>x.id!==id);if(S.pomo.link===id)S.pomo.link='';save();renderAll();toast('已删除「'+t.text.slice(0,14)+'」')}
@@ -1609,7 +1633,7 @@ function renderMeal(){
 function renderAlarms(){
   const list=[...S.alarms].sort((a,b)=>a.time.localeCompare(b.time));
   $('#alarmCount').textContent=`${S.alarms.filter(a=>a.on).length} / ${S.alarms.length} 已开启`;
-  $('#alarmList').innerHTML=list.map(a=>`<div class="alarm ${a.on?'':'off'}"><span class="t">${a.time}</span><span class="txt">${esc(a.text)}</span><label class="switch"><input type="checkbox" data-alarm="${a.id}" ${a.on?'checked':''}><span></span></label><button class="del" data-delalarm="${a.id}" title="删除">${IC.x}</button></div>`).join('')||'<div class="empty">还没有提醒</div>';
+  $('#alarmList').innerHTML=list.map(a=>`<div class="alarm ${a.on?'':'off'}"><span class="t">${a.time}</span><span class="txt">${esc(a.text)}</span><label class="switch"><input type="checkbox" data-alarm="${a.id}" ${a.on?'checked':''}><span></span></label><button class="del" data-delalarm="${a.id}" title="删除">${IC.x}</button></div>`).join('')||'<div class="empty">还没有提醒，<a data-focus="#alarmForm input">点这里添加</a></div>';
 }
 $('#alarmForm').onsubmit=e=>{e.preventDefault();const f=e.target;S.alarms.push({id:uid(),time:f.time.value,text:f.text.value.trim(),on:true,fired:''});save();f.reset();renderAll();toast('提醒已添加')};
 $('#alarmList').addEventListener('change',e=>{const id=e.target.dataset.alarm;if(!id)return;const a=S.alarms.find(x=>x.id===id);a.on=e.target.checked;save();renderAll()});
@@ -1744,7 +1768,7 @@ function planDay(fromNow){
   const left=queue.filter(x=>x.need>0);
   why.push(left.length?`今日空档不足，${left.length} 项低优先级任务（${left.slice(0,2).map(x=>x.t.text.slice(0,8)).join('、')}）建议顺延到明天`:'所有未完成待办都已排入，今天可以从容收尾');
   why.push('早 / 午 / 晚饭时间已保留，遇到课程冲突会自动顺延');
-  {const dt=ddlTasks(today);if(dt.length)why.splice(1,0,`临近 DDL 自动提升为「重要紧急」：${dt.slice(0,2).map(x=>x.t.text.replace('DDL：','')).join('、')}${dt.length>2?' 等 '+dt.length+' 项':''}，按剩余时间与预计时长优先排入`);const ex=examsOn(today);if(ex.length)why.splice(1,0,'今天有考试：'+ex.map(x=>x.subject+' '+x.start).join('、')+'，已锁定考试时段')}
+  {const dt=ddlTasks(today);if(dt.length)why.splice(1,0,`临近 DDL 自动提升为「重要紧急」：${dt.slice(0,2).map(x=>x.t.text.replace(/^DDL[^：]*：/,'')).join('、')}${dt.length>2?' 等 '+dt.length+' 项':''}，按剩余时间与预计时长优先排入`);const ex=examsOn(today);if(ex.length)why.splice(1,0,'今天有考试：'+ex.map(x=>x.subject+' '+x.start).join('、')+'，已锁定考试时段')}
   return {date:today,from:fromNow?'now':'day',blocks:out.map(b=>({...b,id:uid(),start:fmtT(b.s),end:fmtT(b.e)})),why,stats:{pomos,tasks:placed.size,free:freeMin,gaps:gaps.length,batch:batch.length},at:hm()};
 }
 function fmtT(m){m=Math.round(m);return pad(Math.floor(m/60)%24)+':'+pad(m%60)}
@@ -1790,7 +1814,7 @@ function renderNotes(){
   $('#noteTagsBar').innerHTML=`<button class="fchip ${!noteTag?'on':''}" data-ntag="">全部 ${S.notes.length}</button>`+Object.entries(tags).sort((a,b)=>b[1]-a[1]).map(([t,c])=>`<button class="fchip ${noteTag===t?'on':''}" data-ntag="${esc(t)}"><span class="dot" style="background:${hashC(t)}"></span>#${esc(t)} ${c}</button>`).join('');
   const list=S.notes.filter(n=>(!noteTag||n.tags.includes(noteTag))&&(!noteQ||n.text.toLowerCase().includes(noteQ)||n.tags.some(t=>t.toLowerCase().includes(noteQ)))).sort((a,b)=>(b.pinned-a.pinned)||(b.ts-a.ts));
   $('#noteCount').textContent=`共 ${S.notes.length} 条 · 显示 ${list.length} 条`;
-  $('#noteList').innerHTML=list.map(n=>`<div class="note ${n.pinned?'pinned':''}" style="--nc:${n.cat&&CATS_T[n.cat]?CATS[n.cat].c:n.tags[0]?hashC(n.tags[0]):'var(--line)'}">${n.cat&&CATS_T[n.cat]?`<span class="tag" style="color:${CATS[n.cat].c};background:color-mix(in srgb,${CATS[n.cat].c} 14%,transparent);margin-bottom:6px"><i></i>${esc(CATS[n.cat].n)}</span>`:''}${n.pinned?'<span class="pin-b">置顶</span>':''}<p>${esc(n.text)}</p><div class="ntags">${n.tags.map(t=>`<button class="ntag" data-ntag="${esc(t)}">#${esc(t)}</button>`).join('')}${n.todo?'<span class="ntag" style="color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)">已转待办</span>':''}</div><div class="nfoot"><span>${relT(n.ts)}</span><span class="sp"></span><button class="nbtn ${n.pinned?'on':''}" data-npin="${n.id}">${n.pinned?'取消置顶':'置顶'}</button><button class="nbtn" data-ntodo="${n.id}">转待办</button><button class="nbtn" data-ndel="${n.id}">删除</button></div></div>`).join('')||'<div class="empty">没有匹配的记录</div>';
+  $('#noteList').innerHTML=list.map(n=>`<div class="note ${n.pinned?'pinned':''}" style="--nc:${n.cat&&CATS_T[n.cat]?CATS[n.cat].c:n.tags[0]?hashC(n.tags[0]):'var(--line)'}">${n.cat&&CATS_T[n.cat]?`<span class="tag" style="color:${CATS[n.cat].c};background:color-mix(in srgb,${CATS[n.cat].c} 14%,transparent);margin-bottom:6px"><i></i>${esc(CATS[n.cat].n)}</span>`:''}${n.pinned?'<span class="pin-b">置顶</span>':''}<p>${esc(n.text)}</p><div class="ntags">${n.tags.map(t=>`<button class="ntag" data-ntag="${esc(t)}">#${esc(t)}</button>`).join('')}${n.todo?'<span class="ntag" style="color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)">已转待办</span>':''}</div><div class="nfoot"><span>${relT(n.ts)}</span><span class="sp"></span><button class="nbtn ${n.pinned?'on':''}" data-npin="${n.id}">${n.pinned?'取消置顶':'置顶'}</button><button class="nbtn" data-ntodo="${n.id}">转待办</button><button class="nbtn" data-ndel="${n.id}">删除</button></div></div>`).join('')||(S.notes.length?'<div class="empty">没有匹配的记录</div>':'<div class="empty">还没有记录，<a data-focus="#noteText">点这里写下第一条灵感</a></div>');
 }
 document.addEventListener('click',e=>{
   const tg=e.target.closest('[data-ntag]');if(tg){noteTag=tg.dataset.ntag===noteTag&&tg.classList.contains('ntag')?'':tg.dataset.ntag;renderNotes();return}
@@ -1964,7 +1988,7 @@ function renderHabits(){
   if(!$('#hbToday'))return;const td=dstr();
   const due=S.habits.filter(h=>habitDue(h,td));const doneN=due.filter(h=>hLog(h,td)).length;
   $('#hbTodayCnt').textContent=`${doneN} / ${due.length} 已完成`;
-  $('#hbToday').innerHTML=due.map(h=>{const l=hLog(h,td);return `<div class="hb-item ${l?'done':''}" style="--hc:${h.c}">${hIcon(h)}<div class="grow"><b>${esc(h.name)}</b><small>${h.time?h.time+' · ':''}${h.dur?h.dur+' 分钟 · ':''}${RULE_N(h)}</small></div>${l?`<span class="hb-at">${tic('todo',13)} ${l.t} 已打卡</span><label class="hb-dur">用时 <input class="input" type="number" min="0" max="600" data-hdur="${h.id}" value="${l.dur||0}"> 分钟</label>`:''}<button class="btn ${l?'':'primary'} sm" data-hcheck="${h.id}">${l?'撤销':'打卡'}</button></div>`}).join('')||'<div class="empty">今天没有需要打卡的项目</div>';
+  $('#hbToday').innerHTML=due.map(h=>{const l=hLog(h,td);return `<div class="hb-item ${l?'done':''}" style="--hc:${h.c}">${hIcon(h)}<div class="grow"><b>${esc(h.name)}</b><small>${h.time?h.time+' · ':''}${h.dur?h.dur+' 分钟 · ':''}${RULE_N(h)}</small></div>${l?`<span class="hb-at">${tic('todo',13)} ${l.t} 已打卡</span><label class="hb-dur">用时 <input class="input" type="number" min="0" max="600" data-hdur="${h.id}" value="${l.dur||0}"> 分钟</label>`:''}<button class="btn ${l?'':'primary'} sm" data-hcheck="${h.id}">${l?'撤销':'打卡'}</button></div>`}).join('')||(S.habits.length?'<div class="empty">今天没有需要打卡的项目</div>':'<div class="empty">还没有打卡项，<a data-click="#hbAdd">点这里新建</a></div>');
   const wk=weekDays(),mo=monthDays(),t0=new Date();t0.setHours(0,0,0,0);
   $('#hbList').innerHTML=S.habits.map(h=>{
     const st=habitStreak(h),W=habitPeriod(h,wk),M=habitPeriod(h,mo);const H={...h,active:true};
@@ -1974,7 +1998,7 @@ function renderHabits(){
     return `<div class="card hb-card ${h.active?'':'off'}" style="--hc:${h.c}"><div class="card-head"><div class="row">${hIcon(h)}<div><b style="font-size:15px">${esc(h.name)}</b><div class="muted" style="font-size:12px">${RULE_N(h)}${h.time?' · '+h.time:''}${h.dur?' · '+h.dur+' 分钟':''}${h.active?'':' · 已停用'}</div></div></div><div class="row" style="gap:2px"><button class="nbtn" data-hedit="${h.id}">编辑</button><button class="nbtn" data-htoggle="${h.id}">${h.active?'停用':'启用'}</button><button class="nbtn" data-hdel="${h.id}">删除</button></div></div>
       <div class="hb-stats"><div class="mini"><b style="color:var(--hc)">${st}</b><span>连续${h.rule.type==='weekly'?'周':'天'}</span></div><div class="mini"><b>${W.done}<small>/${W.exp}</small></b><span>本周 · ${W.rate}%</span></div><div class="mini"><b>${M.done}<small>/${M.exp}</small></b><span>本月 · ${M.rate}%</span></div><div class="mini"><b>${h.log.length}</b><span>累计次数</span></div></div>
       <div class="hb-bottom"><div><div class="muted" style="font-size:12px;margin-bottom:6px">近 12 周</div><div class="hb-hm">${cells}</div></div><div style="flex:1;min-width:170px"><div class="muted" style="font-size:12px;margin-bottom:6px">最近打卡</div><ul class="hb-log">${recent.map(l=>{const d=new Date(l.d+'T00:00:00');return `<li><span>${l.d===dstr()?'今天':(d.getMonth()+1)+'/'+d.getDate()+' 周'+WD_N[wdOf(d)]}</span><b>${l.t}</b><span class="faint">${l.dur?l.dur+' 分钟':'—'}</span></li>`}).join('')||'<li class="faint">还没有打卡记录</li>'}</ul></div></div>
-      <div class="hb-opts"><label class="hb-opt"><span class="switch"><input type="checkbox" data-htl="${h.id}" ${h.onTl?'checked':''}><span></span></span>显示在时间轴上</label><label class="hb-opt"><span class="switch"><input type="checkbox" data-hrem="${h.id}" ${h.remind?'checked':''}><span></span></span>到点提醒${h.time?' '+h.time:''}</label></div></div>`}).join('')||'<div class="empty">还没有打卡项，点击右上角新建</div>';
+      <div class="hb-opts"><label class="hb-opt"><span class="switch"><input type="checkbox" data-htl="${h.id}" ${h.onTl?'checked':''}><span></span></span>显示在时间轴上</label><label class="hb-opt"><span class="switch"><input type="checkbox" data-hrem="${h.id}" ${h.remind?'checked':''}><span></span></span>到点提醒${h.time?' '+h.time:''}</label></div></div>`}).join('')||'<div class="card empty" style="padding:36px">还没有打卡项，<a data-click="#hbAdd">点这里新建第一个打卡</a>（如早起、背单词、运动）</div>';
 }
 function openHabitEditor(h){
   const v=h||{name:'',icon:'',c:PALETTE[3],rule:{type:'daily',days:[1,2,3,4,5],n:3},time:'07:30',dur:30,remind:false,onTl:false};
@@ -2064,12 +2088,12 @@ function renderGlobal(){
   let html='';
   if(gvMode==='month'){
     html=`<div class="mo-head">${[1,2,3,4,5,6,7].map(d=>`<span>周${WD_N[d]}</span>`).join('')}</div><div class="mo-grid">`+dates.map(ds=>{const d=new Date(ds+'T00:00:00');const out=d.getMonth()!==a.getMonth();const it=gvItems(ds).filter(i=>i.type!=='habit');const due=dueOnly(ds);const L=dayLoad(ds);const st=starOf(ds);
-      const pri=[...it.filter(i=>i.type==='exam').map(i=>({...i,cls:'exam'})),...ddlsOn(ds).map(d=>({title:'DDL '+(d.time||'23:59')+' '+d.title,c:'#f97316',s:-1,cls:'ddl'})),...it.filter(i=>i.type!=='course'&&i.type!=='exam'),...due.map(t=>({title:'截止 · '+t.text,c:CATS[t.cat].c,s:-1})),...it.filter(i=>i.type==='course')];
+      const pri=[...it.filter(i=>i.type==='exam').map(i=>({...i,cls:'exam'})),...ddlsOn(ds).map(d=>({title:'DDL '+(d.time||'23:59')+' '+d.title,c:typeOf('ddl',d.kind).c,s:-1,cls:'ddl'})),...it.filter(i=>i.type!=='course'&&i.type!=='exam'),...due.map(t=>({title:'截止 · '+t.text,c:CATS[t.cat].c,s:-1})),...it.filter(i=>i.type==='course')];
       return `<div class="mo-cell ${out?'out':''} ${ds===td?'today':''} ${st?'star':''} ${L.full?'full':''} ${ds===gvSel?'sel':''}" data-mday="${ds}"><div class="mo-top"><span class="mo-d">${d.getDate()}</span><button class="star-btn ${st?'on':''}" data-star="${ds}" title="${st?esc(st.note):'标记为重要日'}">${STAR_SVG(13)}</button>${L.n?`<span class="mo-n">${L.n} 项</span>`:''}</div>${st?`<div class="mo-star">${esc(st.note)}</div>`:''}${pri.slice(0,st?2:3).map(i=>`<div class="mo-it ${i.cls||''}" style="--ec:${i.c}"><i></i>${i.s>=0?fmtT(i.s)+' ':''}${esc(i.title)}</div>`).join('')}${pri.length>(st?2:3)?`<div class="mo-more">+${pri.length-(st?2:3)} 项</div>`:''}${L.full?'<div class="mo-full">这天很满</div>':''}</div>`}).join('')+'</div>';
   }else{
     const H=(DV_END-DV_START)*60*PX;let grid='';for(let hh=DV_START;hh<=DV_END;hh++)grid+=`<div class="dv-hour" style="top:${(hh-DV_START)*60*PX}px"><span>${pad(hh%24)}:00</span></div>`;
     const heads=dates.map(ds=>{const d=new Date(ds+'T00:00:00');const L=dayLoad(ds);const st=starOf(ds);return `<div class="mv-h ${ds===td?'today':''} ${L.full?'full':''} ${st?'star':''} ${ds===gvSel?'sel':''}" data-mday="${ds}"><div class="row" style="gap:6px;justify-content:center"><b>周${WD_N[wdOf(d)]}</b><span class="mv-dn">${d.getMonth()+1}/${d.getDate()}</span><button class="star-btn ${st?'on':''}" data-star="${ds}" title="${st?esc(st.note):'标记为重要日'}">${STAR_SVG(13)}</button></div><small>${st?esc(st.note):L.n+' 项 · '+fmtDur(L.busy)}</small>${L.full?'<em>这天很满</em>':''}</div>`}).join('');
-    const ad=dates.map(ds=>`<div class="mv-adc">${ddlsOn(ds).map(d=>`<span class="ad-chip ddl ${d.status==='done'?'done':''}" data-ddl="${d.id}">${FLAG(10)} ${d.time||'23:59'} ${esc(d.title)}</span>`).join('')}${dueOnly(ds).map(t=>`<span class="ad-chip" data-adtodo="${t.id}" style="--ec:${CATS[t.cat].c}">截止 · ${esc(t.text)}</span>`).join('')}</div>`).join('');
+    const ad=dates.map(ds=>`<div class="mv-adc">${ddlsOn(ds).map(d=>`<span class="ad-chip ddl ${d.status==='done'?'done':''}" data-ddl="${d.id}" style="--ec:${typeOf('ddl',d.kind).c}">${FLAG(10)} ${d.time||'23:59'} ${esc(d.title)}</span>`).join('')}${dueOnly(ds).map(t=>`<span class="ad-chip" data-adtodo="${t.id}" style="--ec:${CATS[t.cat].c}">截止 · ${esc(t.text)}</span>`).join('')}</div>`).join('');
     const cols=dates.map(ds=>{const it=gvItems(ds);layoutCols(it);return `<div class="mv-col ${ds===td?'today':''}" data-date="${ds}">${it.map(i=>evMini(i,ds===td,n)).join('')}${ddlLinesHtml(ds,0)}${ds===td&&n>=DV_START*60?`<div class="now-line" style="left:0;top:${(n-DV_START*60)*PX}px"></div>`:''}</div>`}).join('');
     const old=$('#gvBody .dv-scroll');const keep=old?old.scrollTop:null;
     html=`<div class="mvw mvw-${gvMode}" style="--n:${dates.length}"><div class="mv-heads"><div></div>${heads}</div><div class="mv-ad"><div class="mv-gut">截止</div>${ad}</div><div class="dv-scroll" style="height:560px"><div class="mv-grid" style="height:${H+12}px">${grid}<div class="mv-cols">${cols}</div></div></div></div>`;
@@ -2079,7 +2103,7 @@ function renderGlobal(){
   if(html!==null)$('#gvBody').innerHTML=html;
   // 当天详情
   const it=gvItems(gvSel),due=dueOnly(gvSel),st=starOf(gvSel);
-  $('#gvDayCard').innerHTML=`<div class="card-head"><h3>${fmtMD(gvSel)}${gvSel===td?' · 今天':''}</h3><div class="row" style="gap:6px"><button class="star-btn big ${st?'on':''}" data-star="${gvSel}" title="标记重要日">${STAR_SVG(16)}</button><button class="btn sm" data-gvopen="${gvSel}">日视图 →</button></div></div>${st?`<div class="star-note">${STAR_SVG(13)} ${esc(st.note)}</div>`:''}<ul class="mlist" style="max-height:260px">${it.map(i=>`<li data-gvitem="${i.type}|${i.id}|${gvSel}" style="--ec:${i.c}"><span class="bar-c"></span><div class="grow"><b>${esc(i.title)}</b><small>${fmtT(i.s)}–${fmtT(i.e)} · ${TYPE[i.type]?TYPE[i.type].n:'打卡'}</small></div></li>`).join('')}${ddlsOn(gvSel).map(d=>`<li data-ddl="${d.id}" style="--ec:#f97316"><span class="bar-c"></span><div class="grow"><b>DDL · ${esc(d.title)}</b><small>${d.time||'23:59'} 截止 · ${DDL_ST[ddlStatus(d)]}</small></div></li>`).join('')}${due.map(t=>`<li data-gvitem="todo|${t.id}|${gvSel}" style="--ec:${CATS[t.cat].c}"><span class="bar-c"></span><div class="grow"><b>${esc(t.text)}</b><small>当天截止 · ${QUADS[t.q].n}</small></div></li>`).join('')||(it.length?'':'<div class="empty">这天还没有安排</div>')}</ul>`;
+  $('#gvDayCard').innerHTML=`<div class="card-head"><h3>${fmtMD(gvSel)}${gvSel===td?' · 今天':''}</h3><div class="row" style="gap:6px"><button class="star-btn big ${st?'on':''}" data-star="${gvSel}" title="标记重要日">${STAR_SVG(16)}</button><button class="btn sm" data-gvopen="${gvSel}">日视图 →</button></div></div>${st?`<div class="star-note">${STAR_SVG(13)} ${esc(st.note)}</div>`:''}<ul class="mlist" style="max-height:260px">${it.map(i=>`<li data-gvitem="${i.type}|${i.id}|${gvSel}" style="--ec:${i.c}"><span class="bar-c"></span><div class="grow"><b>${esc(i.title)}</b><small>${fmtT(i.s)}–${fmtT(i.e)} · ${TYPE[i.type]?TYPE[i.type].n:'打卡'}</small></div></li>`).join('')}${ddlsOn(gvSel).map(d=>`<li data-ddl="${d.id}" style="--ec:${typeOf('ddl',d.kind).c}"><span class="bar-c"></span><div class="grow"><b>DDL · ${esc(d.title)}</b><small>${d.time||'23:59'} 截止 · ${DDL_ST[ddlStatus(d)]}</small></div></li>`).join('')}${due.map(t=>`<li data-gvitem="todo|${t.id}|${gvSel}" style="--ec:${CATS[t.cat].c}"><span class="bar-c"></span><div class="grow"><b>${esc(t.text)}</b><small>当天截止 · ${QUADS[t.q].n}</small></div></li>`).join('')||(it.length?'':'<div class="empty">这天还没有安排</div>')}</ul>`;
   // 未排期 & 即将截止
   const un=S.todos.filter(t=>!t.done&&!t.due),soon=S.todos.filter(t=>!t.done&&t.due&&t.due>td&&!t.time).sort((x,y)=>x.due.localeCompare(y.due));
   $('#gvUnCnt').textContent=`${un.length} 项`;
@@ -2117,16 +2141,16 @@ function allDue(){return [...(S.exams||[]).map(x=>({kind:'exam',x,ts:examTs(x)})
 const FLAG=sz=>`<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V3"/><path d="M5 4h13l-3.5 4.5L18 13H5z" fill="currentColor"/></svg>`;
 const PEN=sz=>`<svg width="${sz}" height="${sz}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>`;
 function starOf(ds){const s=S.stars&&S.stars[ds];const ex=examsOn(ds);if(!ex.length)return s||null;const en='考试：'+ex.map(x=>x.subject).join('、');return {note:s?s.note+' · '+en:en,exam:true}}
-function ddlLinesHtml(date,left){return ddlsOn(date).filter(d=>d.status!=='done').map(d=>{const m=toMin(d.time||'23:59');if(m<DV_START*60)return '';return `<div class="ddl-line ${ddlStatus(d)==='overdue'?'over':''}" style="top:${(m-DV_START*60)*PX}px;left:${left}px" data-ddl="${d.id}" title="DDL ${d.time||'23:59'} ${esc(d.title)}"><span>${FLAG(11)} DDL ${d.time||'23:59'} · ${esc(d.title)}</span></div>`}).join('')}
+function ddlLinesHtml(date,left){return ddlsOn(date).filter(d=>d.status!=='done').map(d=>{const m=toMin(d.time||'23:59');if(m<DV_START*60)return '';return `<div class="ddl-line ${ddlStatus(d)==='overdue'?'over':''}" style="--dc:${typeOf('ddl',d.kind).c};top:${(m-DV_START*60)*PX}px;left:${left}px" data-ddl="${d.id}" title="DDL ${d.time||'23:59'} ${esc(d.title)}"><span>${FLAG(11)} ${esc(typeLabel('ddl',d.kind))} ${d.time||'23:59'} · ${esc(d.title)}</span></div>`}).join('')}
 // --- 卡片 ---
 function dueCard(it,compact){
   const x=it.x,u=it.u,isE=it.kind==='exam';
-  if(compact)return `<div class="bg-chip u-${u}" data-${isE?'exam':'ddl'}="${x.id}" style="--uc:${URG_C[u]}"><div class="bg-top">${isE?PEN(14):FLAG(14)}<span>${isE?'考试 · '+esc(x.kind):esc(x.kind)}</span></div><b>${esc(isE?x.subject:x.title)}</b><div class="bg-cd">${cdText(it)}</div><small>${isE?`${x.date.slice(5).replace('-','/')} ${x.start} · ${esc(x.place||'')}`:`${x.due.slice(5).replace('-','/')} ${x.time||'23:59'} · ${DDL_ST[ddlStatus(x)]}`}</small><div class="bg-bar"><i style="width:${isE?examProg(x):(x.status==='done'?100:x.progress||0)}%"></i></div></div>`;
-  if(isE){const p=examProg(x);return `<div class="dl-card u-${u}" style="--uc:${URG_C[u]}"><div class="dl-ic exam">${PEN(20)}</div><div class="dl-main"><div class="dl-t"><b>${esc(x.subject)}</b><span class="dl-badge exam">考试 · ${esc(x.kind)}</span>${x.weight?`<span class="dl-badge">占比 ${esc(x.weight)}</span>`:''}</div><div class="dl-meta">${fmtMD(x.date)} ${x.start} · ${x.dur} 分钟 · ${esc(x.place||'考场待定')}${x.seat?' · 座位 '+esc(x.seat):''}</div>
+  if(compact)return `<div class="bg-chip u-${u}" data-${isE?'exam':'ddl'}="${x.id}" style="--uc:${URG_C[u]}"><div class="bg-top">${isE?PEN(14):FLAG(14)}<span>${esc((isE?'考试 · ':'')+typeLabel(isE?'exam':'ddl',x.kind))}</span><i class="tdot" style="background:${typeOf(isE?'exam':'ddl',x.kind).c};margin-left:auto"></i></div><b>${esc(isE?x.subject:x.title)}</b><div class="bg-cd">${cdText(it)}</div><small>${isE?`${x.date.slice(5).replace('-','/')} ${x.start} · ${esc(x.place||'')}`:`${x.due.slice(5).replace('-','/')} ${x.time||'23:59'} · ${DDL_ST[ddlStatus(x)]}`}</small><div class="bg-bar"><i style="width:${isE?examProg(x):(x.status==='done'?100:x.progress||0)}%"></i></div></div>`;
+  if(isE){const p=examProg(x);return `<div class="dl-card u-${u}" style="--uc:${URG_C[u]}"><div class="dl-ic exam">${PEN(20)}</div><div class="dl-main"><div class="dl-t"><b>${esc(x.subject)}</b>${typeBadge('exam',x.kind)}${x.weight?`<span class="dl-badge">占比 ${esc(x.weight)}</span>`:''}</div><div class="dl-meta">${fmtMD(x.date)} ${x.start} · ${x.dur} 分钟 · ${esc(x.place||'考场待定')}${x.seat?' · 座位 '+esc(x.seat):''}</div>
     <div class="dl-prog"><span>复习进度 ${p}%</span><div class="bar"><i style="width:${p}%"></i></div></div>
     <div class="chap">${(x.chapters||[]).map((c,i)=>`<label class="${c.done?'on':''}"><input type="checkbox" data-chap="${x.id}|${i}" ${c.done?'checked':''}>${esc(c.t)}</label>`).join('')}</div>
     ${x.note?`<div class="dl-note">${esc(x.note)}</div>`:''}</div><div class="dl-side"><div class="dl-cd">${cdText(it)}</div><button class="btn sm primary" data-plan="${x.id}">倒推复习计划</button><button class="btn sm" data-exam="${x.id}">编辑</button><button class="nbtn" data-examdel="${x.id}">删除</button></div></div>`}
-  const st=ddlStatus(x);return `<div class="dl-card u-${u}" style="--uc:${URG_C[u]}"><div class="dl-ic">${FLAG(20)}</div><div class="dl-main"><div class="dl-t"><b>${esc(x.title)}</b><span class="dl-badge">${esc(x.kind)}</span><span class="dl-st st-${st}">${DDL_ST[st]}</span></div><div class="dl-meta">截止 ${fmtMD(x.due)} ${x.time||'23:59'}${x.course?' · '+esc(x.course):''}${x.how?' · 提交：'+esc(x.how):''}${x.est?' · 预计 '+x.est+' 小时':''}</div>
+  const st=ddlStatus(x);return `<div class="dl-card u-${u}" style="--uc:${URG_C[u]}"><div class="dl-ic">${FLAG(20)}</div><div class="dl-main"><div class="dl-t"><b>${esc(x.title)}</b>${typeBadge('ddl',x.kind)}<span class="dl-st st-${st}">${DDL_ST[st]}</span></div><div class="dl-meta">截止 ${fmtMD(x.due)} ${x.time||'23:59'}${x.course?' · '+esc(x.course):''}${x.how?' · 提交：'+esc(x.how):''}${x.est?' · 预计 '+x.est+' 小时':''}</div>
     <div class="dl-prog"><span>进度 ${st==='done'?100:x.progress||0}%</span><div class="bar"><i style="width:${st==='done'?100:x.progress||0}%"></i></div>${st!=='done'?`<input type="range" min="0" max="100" step="10" value="${x.progress||0}" data-dprog="${x.id}" title="拖动更新进度">`:''}</div>
     ${x.members?`<div class="dl-note">小组分工：${esc(x.members)}</div>`:''}${(x.remind||[]).length&&st!=='done'?`<div class="dl-rem">${tic('bell',11)} ${x.remind.map(r=>(REM_OPTS.find(o=>o[0]===r)||[0,r+' 分钟前'])[1]).join(' / ')}</div>`:''}</div>
     <div class="dl-side"><div class="dl-cd">${cdText(it)}</div>${st==='done'?`<button class="btn sm" data-dsub="${x.id}">撤销提交</button>`:`<button class="btn sm primary" data-dsub="${x.id}">标记已提交</button><select class="input sm-sel" data-dst="${x.id}">${['todo','doing'].map(s=>`<option value="${s}" ${x.status===s?'selected':''}>${DDL_ST[s]}</option>`).join('')}</select>`}<button class="btn sm" data-ddl="${x.id}">编辑</button><button class="nbtn" data-ddldel="${x.id}">删除</button></div></div>`}
@@ -2136,13 +2160,13 @@ function renderDeadline(){
   const items=allDue();const wk=weekDays().map(d=>dstr(d));
   const nD=items.filter(i=>i.kind==='ddl'&&wk.includes(i.x.due)&&i.u!=='done').length,nE=items.filter(i=>i.kind==='exam'&&wk.includes(i.x.date)).length,nO=items.filter(i=>i.kind==='ddl'&&ddlStatus(i.x)==='overdue').length,nDone=items.filter(i=>i.kind==='ddl'&&i.x.status==='done').length;
   $('#dlStats').innerHTML=[[nD,'本周 DDL','#f97316'],[nE,'本周考试','#dc2626'],[nO,'已逾期','#ef4444'],[nDone,'已提交','var(--ok)']].map(([v,k,c])=>`<div class="mini"><b style="color:${c}">${v}</b><span>${k}</span></div>`).join('');
-  const kinds=[...new Set(S.ddls.map(d=>d.kind))];
-  $('#dlFilters').innerHTML=`<div class="filters">${[['all','全部'],['exam','考试'],['ddl','全部 DDL'],...kinds.map(k=>['k:'+k,k])].map(([k,n])=>`<button class="fchip ${dlType===k?'on':''}" data-dlt="${esc(k)}">${esc(n)}</button>`).join('')}</div><div class="filters">${[['all','全部状态'],['todo','未开始'],['doing','进行中'],['overdue','已逾期'],['done','已提交']].map(([k,n])=>`<button class="fchip ${dlSt===k?'on':''}" data-dls="${k}">${n}</button>`).join('')}</div>`;
-  const list=items.filter(i=>(dlType==='all'||(dlType==='exam'&&i.kind==='exam')||(dlType==='ddl'&&i.kind==='ddl')||(dlType.startsWith('k:')&&i.kind==='ddl'&&i.x.kind===dlType.slice(2)))&&(dlSt==='all'||(i.kind==='ddl'?ddlStatus(i.x)===dlSt:(dlSt==='done'?i.u==='done':dlSt!=='overdue'&&i.u!=='done'))));
-  $('#dlList').innerHTML=list.map(i=>dueCard(i)).join('')||'<div class="empty">没有符合条件的事项</div>';
+  const kinds=S.types.ddl.map(t=>t.name),ekinds=S.types.exam.map(t=>t.name);
+  $('#dlFilters').innerHTML=`<div class="filters">${[['all','全部'],['ddl','全部 DDL'],...kinds.map(k=>['k:'+k,typeLabel('ddl',k),typeOf('ddl',k).c]),['exam','全部考试'],...ekinds.map(k=>['e:'+k,typeLabel('exam',k),typeOf('exam',k).c])].map(([k,n,c])=>`<button class="fchip ${dlType===k?'on':''}" data-dlt="${esc(k)}">${c?`<span class="dot" style="background:${c}"></span>`:''}${esc(n)}</button>`).join('')}<button class="fchip" data-typemgr="ddl" style="border-style:dashed"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="vertical-align:-1px;margin-right:3px"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>管理类型</button></div><div class="filters">${[['all','全部状态'],['todo','未开始'],['doing','进行中'],['overdue','已逾期'],['done','已提交']].map(([k,n])=>`<button class="fchip ${dlSt===k?'on':''}" data-dls="${k}">${n}</button>`).join('')}</div>`;
+  const list=items.filter(i=>(dlType==='all'||(dlType==='exam'&&i.kind==='exam')||(dlType==='ddl'&&i.kind==='ddl')||(dlType.startsWith('k:')&&i.kind==='ddl'&&i.x.kind===dlType.slice(2))||(dlType.startsWith('e:')&&i.kind==='exam'&&i.x.kind===dlType.slice(2)))&&(dlSt==='all'||(i.kind==='ddl'?ddlStatus(i.x)===dlSt:(dlSt==='done'?i.u==='done':dlSt!=='overdue'&&i.u!=='done'))));
+  $('#dlList').innerHTML=list.map(i=>dueCard(i)).join('')||(items.length?'<div class="empty">没有符合条件的事项</div>':'<div class="card empty" style="padding:36px">还没有考试或 DDL。<a data-click="#ddlAdd">点这里添加 DDL</a> 或 <a data-click="#examAdd">添加考试</a>，也可以在「AI 排程」里用一句话添加。</div>');
   // 不鸽榜（总览）
   const top=items.filter(i=>i.u!=='done').slice(0,6);
-  const ob=$('#ovBoard');if(ob)ob.innerHTML=top.map(i=>dueCard(i,true)).join('')||'<div class="empty">没有临近的考试和 DDL，太棒了</div>';
+  const ob=$('#ovBoard');if(ob)ob.innerHTML=top.map(i=>dueCard(i,true)).join('')||(items.length?'<div class="empty">没有临近的考试和 DDL，太棒了</div>':'<div class="empty" style="grid-column:1/-1">还没有考试或 DDL，<a data-go="deadline" data-click="#ddlAdd">点这里添加第一个 DDL</a></div>');
   const os=$('#ovBoardStat');if(os)os.innerHTML=`本周 <b>${nD}</b> 个 DDL · <b>${nE}</b> 场考试${nO?` · <b style="color:#ef4444">${nO}</b> 个已逾期`:''}`;
   // 复习计划选择
   const sel=$('#planExam');const ups=S.exams.filter(x=>dayDiff(x.date)>=0).sort((a,b)=>a.date.localeCompare(b.date));
@@ -2187,7 +2211,7 @@ function openExamEditor(x){
   const v=x||{subject:'',kind:'期末',date:dstr(addDays(new Date(),14)),start:'09:00',dur:120,place:'',seat:'',weight:'',note:'',chapters:[]};
   showModal({title:x?'编辑考试':'添加考试',wide:true,icon:PEN(30).replace('currentColor','#fff'),color:'linear-gradient(135deg,#dc2626,#f97316)',html:`<div class="mform">
     <div><label>科目</label><input class="input" id="ex-sub" value="${esc(v.subject)}" placeholder="如：数据结构"></div>
-    <div><label>考试类型（可自定义）</label><input class="input" id="ex-kind" list="examKindList" value="${esc(v.kind)}"><datalist id="examKindList">${S.examKinds.map(k=>`<option value="${esc(k)}">`).join('')}</datalist></div>
+    <div><label>考试类型（可在「管理类型」中自定义）</label><select class="input" id="ex-kind">${typeOpts('exam',S.types.exam.some(t=>t.name===v.kind)?v.kind:firstType('exam'))}</select></div>
     <div><label>日期</label><input class="input" type="date" id="ex-date" value="${v.date}"></div>
     <div><label>开始时间</label><input class="input" type="time" id="ex-start" value="${v.start}"></div>
     <div><label>时长（分钟）</label><input class="input" type="number" id="ex-dur" value="${v.dur}" min="10"></div>
@@ -2198,7 +2222,7 @@ function openExamEditor(x){
     <div class="full"><label>备注</label><input class="input" id="ex-note" value="${esc(v.note||'')}" placeholder="如：开卷，可带计算器"></div></div>`,
     actions:[{label:'取消'},{label:'保存',primary:true,onClick:m=>{const g=s=>m.querySelector(s).value.trim();if(!g('#ex-sub')){toast('请填写科目');return false}
       const old=v.chapters||[];const ch=g('#ex-ch').split('\n').map(s=>s.trim()).filter(Boolean).map(t=>({t,done:!!(old.find(o=>o.t===t)||{}).done}));
-      const kind=g('#ex-kind')||'考试';if(!S.examKinds.includes(kind))S.examKinds.push(kind);
+      const kind=g('#ex-kind')||firstType('exam');
       const nv={subject:g('#ex-sub'),kind,date:g('#ex-date')||dstr(),start:g('#ex-start')||'09:00',dur:Math.max(10,+g('#ex-dur')||120),weight:g('#ex-w'),place:g('#ex-place'),seat:g('#ex-seat'),note:g('#ex-note'),chapters:ch};
       if(x)Object.assign(x,nv);else S.exams.push({id:uid(),...nv});save();renderAll();toast(x?'考试已更新':`已添加考试：${nv.subject}（自动标为重要日）`)}}]});
 }
@@ -2206,7 +2230,7 @@ function openDdlEditor(d){
   const v=d||{title:'',kind:'课程作业',cat:CATS_T.course?'course':Object.keys(CATS_T)[0],due:dstr(addDays(new Date(),3)),time:'23:59',course:'',how:'',status:'todo',progress:0,est:2,members:'',remind:[4320,1440,180]};
   showModal({title:d?'编辑 DDL':'添加 DDL',wide:true,icon:FLAG(30).replace('currentColor','#fff'),color:'linear-gradient(135deg,#f97316,#ef4444)',html:`<div class="mform">
     <div class="full"><label>标题</label><input class="input" id="dd-title" value="${esc(v.title)}" placeholder="如：软件工程大作业中期报告"></div>
-    <div><label>DDL 类型（可自定义）</label><input class="input" id="dd-kind" list="ddlKindList" value="${esc(v.kind)}"><datalist id="ddlKindList">${S.ddlKinds.map(k=>`<option value="${esc(k)}">`).join('')}</datalist></div>
+    <div><label>DDL 类型（可在「管理类型」中自定义）</label><select class="input" id="dd-kind">${typeOpts('ddl',S.types.ddl.some(t=>t.name===v.kind)?v.kind:firstType('ddl'))}</select></div>
     <div><label>分类</label><select class="input" id="dd-cat">${Object.entries(CATS).map(([k,c])=>`<option value="${k}" ${k===v.cat?'selected':''}>${esc(c.n)}</option>`).join('')}</select></div>
     <div><label>截止日期</label><input class="input" type="date" id="dd-due" value="${v.due}"></div>
     <div><label>截止时间</label><input class="input" type="time" id="dd-time" value="${v.time||'23:59'}"></div>
@@ -2218,7 +2242,7 @@ function openDdlEditor(d){
     <div class="full"><label>小组成员与分工（可选）</label><input class="input" id="dd-mem" value="${esc(v.members||'')}" placeholder="我：PPT；小王：后端…"></div>
     <div class="full"><label>提前提醒（浏览器通知 + 弹窗）</label><div class="days rem-days">${REM_OPTS.map(([m,n])=>`<label><input type="checkbox" value="${m}" ${(v.remind||[]).includes(m)?'checked':''}><span style="width:auto;padding:0 10px">${n}</span></label>`).join('')}</div></div></div>`,
     actions:[{label:'取消'},{label:'保存',primary:true,onClick:m=>{const g=s=>m.querySelector(s).value.trim();if(!g('#dd-title')){toast('请填写标题');return false}
-      const kind=g('#dd-kind')||'其他';if(!S.ddlKinds.includes(kind))S.ddlKinds.push(kind);
+      const kind=g('#dd-kind')||firstType('ddl');
       const nv={title:g('#dd-title'),kind,cat:g('#dd-cat'),due:g('#dd-due')||dstr(),time:g('#dd-time')||'23:59',course:g('#dd-course'),how:g('#dd-how'),status:g('#dd-st'),progress:Math.max(0,Math.min(100,+g('#dd-prog')||0)),est:+g('#dd-est')||0,members:g('#dd-mem'),remind:[...m.querySelectorAll('.rem-days input:checked')].map(x=>+x.value)};
       if(d){const wasDone=d.status==='done';if(nv.status==='done'&&!wasDone){nv.status=d.status;Object.assign(d,nv);ddlSubmit(d.id);return}Object.assign(d,nv)}else S.ddls.push({id:uid(),fired:{},...nv});save();renderAll();toast(d?'DDL 已更新':'已添加 DDL：'+nv.title)}}]});
 }
@@ -2250,20 +2274,116 @@ function ddlTick(){const now=Date.now();(S.ddls||[]).forEach(d=>{if(d.status==='
 // --- AI 排程 & 自然语言 ---
 function ddlTasks(today){return (S.ddls||[]).filter(d=>d.status!=='done').map(d=>{const h=(ddlTs(d)-Date.now())/36e5;if(h>7*24)return null;
   const sc=h<0?220:h<=24?190:h<=72?150:95;const need=Math.max(1,Math.min(4,Math.ceil((d.est||1)*(1-(d.progress||0)/100)*2)));
-  return {t:{id:'ddl:'+d.id,text:'DDL：'+d.title,cat:d.cat||'course',q:h<=72?1:2},sc,need}}).filter(Boolean)}
+  return {t:{id:'ddl:'+d.id,text:'DDL·'+typeLabel('ddl',d.kind)+'：'+d.title,cat:d.cat||'course',q:h<=72?1:2},sc,need}}).filter(Boolean)}
 const DDL_KIND_RE=[['导师作业',/导师|老板/],['小组作业',/小组|组队|团队/],['论文作业',/论文|essay|Essay|paper/],['申请申报提交',/申请|申报|报名表|奖学金/],['材料提交',/材料|盖章|打印|表格/],['课程作业',/作业|报告|习题|实验/]];
 function nlEnrich(r,raw){
-  const ek=raw.match(/(期中|期末|小测|测验|资格考|四级|六级|考试)/);
-  if(ek&&r.due){let kind={四级:'英语四六级',六级:'英语四六级',测验:'小测',考试:'考试'}[ek[1]]||ek[1];const pm=raw.match(/([一-龥]{1,3}\s?[A-Z]?\d{2,4})/);const place=pm&&/\d{2,}/.test(pm[1])&&!/月|号|点|日/.test(pm[1])?pm[1].trim():'';
-    let sub=r.text.replace(/(期中|期末|小测|测验|资格考|考试|英语|四级|六级)/g,' ').replace(place,' ').replace(/\s+/g,' ').trim();
+  const byLen=a=>[...(a||[])].sort((x,y)=>y.name.length-x.name.length);
+  const cet=byLen(S.types.exam).find(t=>raw.includes(t.name));
+  const ek=cet?[cet.name,cet.name]:raw.match(/(期中|期末|小测|测验|资格考|四级|六级|考试)/);
+  if(ek&&r.due){let kind=cet?cet.name:({四级:'英语四六级',六级:'英语四六级',测验:'小测'}[ek[1]]||ek[1]);if(!cet&&!S.types.exam.some(t=>t.name===kind))kind=S.types.exam.some(t=>t.name.includes(ek[1]))?S.types.exam.find(t=>t.name.includes(ek[1])).name:firstType('exam');const pm=raw.match(/([一-龥]{1,3}\s?[A-Z]?\d{2,4})/);const place=pm&&/\d{2,}/.test(pm[1])&&!/月|号|点|日/.test(pm[1])?pm[1].trim():'';
+    let sub=r.text.split(cet?cet.name:'\u0000').join(' ').replace(/(期中|期末|小测|测验|资格考|考试|英语|四级|六级)/g,' ').replace(place,' ').replace(/\s+/g,' ').trim();
     return {...r,kind:'exam',examKind:kind,subject:sub||'未命名科目',place,q:1,cat:CATS_T.course?'course':r.cat}}
-  if(r.due&&/(前交|前提交|截止|ddl|提交|上交|交.{0,8}(作业|报告|论文|材料|表))/i.test(raw)){const k=(DDL_KIND_RE.find(([,re])=>re.test(raw))||['课程作业'])[0];
+  const cdt=byLen(S.types.ddl).find(t=>raw.includes(t.name));
+  if(r.due&&(cdt||/(前交|前提交|截止|ddl|提交|上交|交.{0,8}(作业|报告|论文|材料|表))/i.test(raw))){let k=cdt?cdt.name:(DDL_KIND_RE.find(([,re])=>re.test(raw))||['课程作业'])[0];if(!S.types.ddl.some(t=>t.name===k))k=firstType('ddl');
     const title=r.text.replace(/^(之?前)?\s*(提交|上交|交)\s*/,'').trim()||r.text;return {...r,kind:'ddl',ddlKind:k,text:title}}
   return r}
 function nlAddSpecial(r){
-  if(r.kind==='exam'){S.exams.push({id:uid(),subject:r.subject,kind:r.examKind,date:r.due,start:r.time||'09:00',dur:120,place:r.place,seat:'',weight:'',note:'由自然语言添加',chapters:[]});if(!S.examKinds.includes(r.examKind))S.examKinds.push(r.examKind);save();renderAll();toast(`已添加考试：${r.subject}（${r.examKind}）· 自动标为重要日`);$('#nlParse').classList.remove('show');$('#nlInput').value='';return true}
-  if(r.kind==='ddl'){S.ddls.push({id:uid(),title:r.text,kind:r.ddlKind,cat:$('#nlC')?$('#nlC').value:r.cat,due:r.due,time:r.time||'23:59',course:'',how:'',status:'todo',progress:0,est:2,members:'',remind:[4320,1440,180],fired:{}});save();renderAll();toast(`已添加 DDL：${r.text}（${r.ddlKind}）`);$('#nlParse').classList.remove('show');$('#nlInput').value='';return true}
+  if(r.kind==='exam'){S.exams.push({id:uid(),subject:r.subject,kind:r.examKind,date:r.due,start:r.time||'09:00',dur:120,place:r.place,seat:'',weight:'',note:'由自然语言添加',chapters:[]});save();renderAll();toast(`已添加考试：${r.subject}（${r.examKind}）· 自动标为重要日`);$('#nlParse').classList.remove('show');$('#nlInput').value='';return true}
+  if(r.kind==='ddl'){S.ddls.push({id:uid(),title:r.text,kind:r.ddlKind,cat:$('#nlC')?$('#nlC').value:r.cat,due:r.due,time:r.time||'23:59',course:'',how:'',status:'todo',progress:0,est:2,members:'',remind:[4320,1440,180],fired:{}});save();renderAll();toast(`已添加 DDL：${r.text}（${typeLabel('ddl',r.ddlKind)}）`);$('#nlParse').classList.remove('show');$('#nlInput').value='';return true}
   return false}
+
+// ===================== 不鸽榜类型管理（DDL 类型 / 考试类型） =====================
+const TYPE_DEF={ddl:[['课程作业','#3b82f6'],['导师作业','#8b5cf6'],['小组作业','#10b981'],['论文作业','#ec4899'],['申请申报提交','#f59e0b'],['材料提交','#64748b']],exam:[['期中','#ef4444'],['期末','#dc2626'],['小测','#f97316'],['资格考','#6366f1'],['英语四六级','#14b8a6']]};
+const TK_N={ddl:'DDL 类型',exam:'考试类型'};
+function defTypes(){return {ddl:TYPE_DEF.ddl.map(([name,c])=>({name,c,icon:''})),exam:TYPE_DEF.exam.map(([name,c])=>({name,c,icon:''}))}}
+function ensureTypes(){
+  if(!S.types||!Array.isArray(S.types.ddl)||!Array.isArray(S.types.exam)){const t=defTypes();
+    (S.ddlKinds||[]).forEach(n=>{if(n&&!t.ddl.some(x=>x.name===n))t.ddl.push({name:n,c:PALETTE[t.ddl.length%PALETTE.length],icon:''})});
+    (S.examKinds||[]).forEach(n=>{if(n&&!t.exam.some(x=>x.name===n))t.exam.push({name:n,c:PALETTE[t.exam.length%PALETTE.length],icon:''})});
+    S.types=t}
+  (S.ddls||[]).forEach(d=>{if(d.kind&&!S.types.ddl.some(x=>x.name===d.kind))S.types.ddl.push({name:d.kind,c:'#94a3b8',icon:''})});
+  (S.exams||[]).forEach(d=>{if(d.kind&&!S.types.exam.some(x=>x.name===d.kind))S.types.exam.push({name:d.kind,c:'#94a3b8',icon:''})});
+  delete S.ddlKinds;delete S.examKinds;
+}
+function typeOf(k,name){return ((S.types&&S.types[k])||[]).find(x=>x.name===name)||{name:name||'未分类',c:'#94a3b8',icon:''}}
+const typeLabel=(k,n)=>{const t=typeOf(k,n);return (t.icon?t.icon+' ':'')+t.name};
+const typeBadge=(k,n)=>{const c=typeOf(k,n).c;return `<span class="dl-badge" style="color:${c};background:color-mix(in srgb,${c} 14%,transparent)">${esc((k==='exam'?'考试 · ':'')+typeLabel(k,n))}</span>`};
+const firstType=k=>((S.types&&S.types[k]||[])[0]||{name:k==='exam'?'考试':'其他'}).name;
+const typeOpts=(k,sel)=>S.types[k].map(t=>`<option value="${esc(t.name)}" ${t.name===sel?'selected':''}>${esc(typeLabel(k,t.name))}</option>`).join('');
+function typeUse(k,name){return (k==='ddl'?S.ddls:S.exams).filter(x=>x.kind===name).length}
+let tmTab='ddl',tmEdit='',tmDel='',tmNew=PALETTE[0];
+function renderTypeMgr(box){
+  const kn=(box.querySelector('#tmName')||{}).value||'',ki=(box.querySelector('#tmIcon')||{}).value||'';
+  const L=S.types[tmTab];
+  const rows=L.map((t,i)=>{const n=typeUse(tmTab,t.name);const key=String(i);
+    let x=`<div class="cm-row"><button class="cm-sw" data-tm-color="${i}" style="background:${t.c}" title="点击改颜色"></button><input class="input cm-icon" data-tm-icon="${i}" value="${esc(t.icon||'')}" maxlength="2" placeholder="图标"><input class="input cm-name" data-tm-name="${i}" value="${esc(t.name)}" maxlength="12"><span class="cm-cnt">${n} 项</span><button class="nbtn" data-tm-up="${i}" ${i?'':'disabled'}>↑</button><button class="nbtn" data-tm-down="${i}" ${i<L.length-1?'':'disabled'}>↓</button><button class="nbtn cm-del" data-tm-del="${i}">删除</button></div>`;
+    if(tmEdit===key)x+=`<div class="cm-pal">${PALETTE.map(p=>`<button class="cm-sw ${p===t.c?'on':''}" data-tm-set="${i}|${p}" style="background:${p}"></button>`).join('')}</div>`;
+    if(tmDel===key)x+=`<div class="cm-delbox">${L.length<2?'至少需要保留一个类型。':n?`有 <b>${n}</b> 项在用「${esc(t.name)}」，删除后迁移到 <select class="input" id="tmTo">${L.filter(o=>o!==t).map(o=>`<option value="${esc(o.name)}">${esc(o.name)}</option>`).join('')}</select>`:`确定删除「${esc(t.name)}」？`}${L.length<2?'':`<button class="btn sm danger" data-tm-delok="${i}">确认删除</button>`}<button class="btn sm" data-tm-delno="1">取消</button></div>`;
+    return x}).join('');
+  box.innerHTML=`<div class="seg" style="margin-bottom:12px">${['ddl','exam'].map(k=>`<button data-tm-tab="${k}" class="${tmTab===k?'on':''}">${TK_N[k]} · ${S.types[k].length}</button>`).join('')}</div><div class="cm-list">${rows}</div><div class="cm-add"><div class="sec-t" style="margin-top:0">新增${TK_N[tmTab]}</div><div class="row" style="flex-wrap:wrap"><input class="input" id="tmIcon" maxlength="2" placeholder="图标" style="width:64px" value="${esc(ki)}"><input class="input" id="tmName" maxlength="12" placeholder="${tmTab==='ddl'?'如：竞赛提交、实习材料':'如：期末答辩、驾照科目一'}" style="flex:1;min-width:140px" value="${esc(kn)}"><button class="btn primary sm" data-tm-add="1">+ 添加</button></div><div class="cm-pal" style="margin-top:8px">${PALETTE.map(p=>`<button class="cm-sw ${p===tmNew?'on':''}" data-tm-new="${p}" style="background:${p}"></button>`).join('')}</div><div class="faint" style="font-size:12px;margin-top:8px">类型颜色用于列表标签、日历与时间轴标记；自然语言添加时，文本中出现类型名会优先匹配。</div></div>`;
+}
+function typesChanged(box){save();renderAll();if(box)renderTypeMgr(box)}
+function openTypeMgr(tab){
+  tmTab=tab||tmTab;tmEdit='';tmDel='';
+  showModal({title:'管理不鸽榜类型',wide:true,icon:FLAG(30).replace('currentColor','#fff'),color:'linear-gradient(135deg,#f97316,#ef4444)',html:'<div id="typeMgr"></div>',actions:[{label:'完成',primary:true}],onMount:m=>{
+    const box=m.querySelector('#typeMgr');renderTypeMgr(box);
+    box.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset,L=S.types[tmTab];
+      if(d.tmTab){tmTab=d.tmTab;tmEdit='';tmDel='';renderTypeMgr(box)}
+      else if(d.tmColor!==undefined){tmEdit=tmEdit===d.tmColor?'':d.tmColor;tmDel='';renderTypeMgr(box)}
+      else if(d.tmSet){const [i,c]=d.tmSet.split('|');L[+i].c=c;tmEdit='';typesChanged(box)}
+      else if(d.tmUp!==undefined){const i=+d.tmUp;if(i>0){[L[i-1],L[i]]=[L[i],L[i-1]];typesChanged(box)}}
+      else if(d.tmDown!==undefined){const i=+d.tmDown;if(i<L.length-1){[L[i+1],L[i]]=[L[i],L[i+1]];typesChanged(box)}}
+      else if(d.tmDel!==undefined){tmDel=d.tmDel;tmEdit='';renderTypeMgr(box)}
+      else if(d.tmDelno){tmDel='';renderTypeMgr(box)}
+      else if(d.tmDelok!==undefined){const t=L[+d.tmDelok];const to=(box.querySelector('#tmTo')||{}).value||L.find(o=>o!==t).name;
+        (tmTab==='ddl'?S.ddls:S.exams).forEach(x=>{if(x.kind===t.name)x.kind=to});
+        if(dlType==='k:'+t.name||dlType==='e:'+t.name)dlType='all';S.types[tmTab]=L.filter(o=>o!==t);tmDel='';typesChanged(box);toast(`已删除类型「${t.name}」`)}
+      else if(d.tmNew){tmNew=d.tmNew;renderTypeMgr(box)}
+      else if(d.tmAdd){const ni=box.querySelector('#tmName'),ii=box.querySelector('#tmIcon');const name=ni.value.trim();if(!name){toast('请输入类型名称');return}if(L.some(t=>t.name===name)){toast('已有同名类型');return}
+        L.push({name,c:tmNew,icon:ii.value.trim()});ni.value='';ii.value='';typesChanged(box);toast(`已添加${TK_N[tmTab]}「${name}」`)}
+    });
+    box.addEventListener('change',e=>{const d=e.target.dataset,L=S.types[tmTab];
+      if(d.tmName!==undefined){const t=L[+d.tmName],v=e.target.value.trim();if(!v||v===t.name){e.target.value=t.name;return}if(L.some(o=>o!==t&&o.name===v)){toast('已有同名类型');e.target.value=t.name;return}
+        (tmTab==='ddl'?S.ddls:S.exams).forEach(x=>{if(x.kind===t.name)x.kind=v});if(dlType==='k:'+t.name)dlType='k:'+v;if(dlType==='e:'+t.name)dlType='e:'+v;t.name=v;typesChanged(box);toast('已重命名为「'+v+'」')}
+      else if(d.tmIcon!==undefined){L[+d.tmIcon].icon=e.target.value.trim();typesChanged(box)}});
+    box.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='tmName'){e.preventDefault();box.querySelector('[data-tm-add]').click()}});
+  }});
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-typemgr]');if(b)openTypeMgr(b.dataset.typemgr||'ddl')});
+
+// ===================== 数据管理 / 欢迎条 / 空状态 =====================
+function dataCounts(){return [['待办',S.todos.length],['日程',S.events.length],['课表',S.courses.length],['DDL',S.ddls.length],['考试',S.exams.length],['打卡项',S.habits.length],['随手记',S.notes.length],['日记',Object.keys(S.diary).length],['重要日',Object.keys(S.stars).length],['历史天数',Object.keys(S.hist).length]]}
+function afterDataSwap(){
+  rebuildCats();ensureTypes();save();
+  P.mode='work';P.running=false;P.left=S.pomo.work*60;aiResult=null;planRes=null;planExam='';
+  dvDate=dstr();gvAnchor=dstr();gvSel=dstr();dyDate=dstr();dyLoaded='';noteTag='';noteQ='';dlType='all';dlSt='all';
+  ['#ovDay','#tlDay'].forEach(s=>{const el=$(s);if(el)delete el.dataset.date});
+  renderAll();renderWelcome();go(S.view||'overview');
+}
+function clearAll(resetCats){
+  const keep={cats:resetCats?CAT_DEF.map(c=>({...c})):S.cats,types:resetCats?defTypes():S.types,pomo:{work:S.pomo.work,brk:S.pomo.brk,date:dstr(),count:0,log:[],link:''},sit:{...S.sit,last:Date.now()},meals:{...S.meals,fired:{}}};
+  S={...keep,courses:[],events:[],todos:[],notes:[],diary:{},hist:{},habits:[],stars:{},exams:[],ddls:[],alarms:[],plan:null,courseOv:{},mealIdx:0,filter:'all',view:'overview',sample:false,welcomeClosed:true};
+  afterDataSwap();toast('已清空全部数据，开始记录你自己的内容吧');
+}
+function restoreSample(){S=seed();S.view='overview';afterDataSwap();toast('已恢复完整示例数据')}
+const DB_IC='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>';
+function openDataMgr(){
+  showModal({title:'数据管理',wide:true,icon:DB_IC,color:'linear-gradient(135deg,#0ea5e9,#4f6bff)',html:`<div class="muted" style="font-size:13px;text-align:center">所有数据只保存在本机浏览器（localStorage），不会上传。${S.sample?'当前为<b>示例数据</b>。':''}</div>
+    <div class="dm-counts">${dataCounts().map(([k,v])=>`<div><b>${v}</b><span>${k}</span></div>`).join('')}</div>
+    <div class="dm-opts"><div class="dm-opt danger"><div class="dm-h">${tic('trash',16)}<b>清空数据</b></div><p>删除全部待办、日程、课表、DDL、考试、打卡、笔记、日记、重要日与历史记录，从零开始体验。</p><label class="hb-opt"><input type="checkbox" id="dmReset"> 同时把分类与不鸽榜类型重置为默认</label></div>
+    <div class="dm-opt"><div class="dm-h">${tic('plan',16)}<b>恢复示例数据</b></div><p>重新载入完整的学生示例：课表、日程、四象限、考试与 DDL、打卡历史、近半年热力图等。</p></div></div>`,
+    actions:[{label:'关闭'},{label:'恢复示例数据',onClick:()=>{showModal({title:'恢复示例数据？',icon:DB_IC,color:'linear-gradient(135deg,#0ea5e9,#4f6bff)',html:'当前所有内容将被<b>替换</b>为预置的示例数据，此操作不可撤销。',actions:[{label:'取消'},{label:'确认恢复',primary:true,onClick:restoreSample}]})}},
+      {label:'清空数据',primary:true,onClick:m=>{const rc=m.querySelector('#dmReset').checked;showModal({title:'确认清空全部数据？',icon:DB_IC,color:'linear-gradient(135deg,#ef4444,#f97316)',html:`将删除 ${dataCounts().filter(x=>x[1]).map(x=>x[0]+' '+x[1]).join('、')||'所有内容'}${rc?'，并重置分类与类型':''}。<div class="hl" style="color:var(--danger)">此操作不可撤销</div>`,actions:[{label:'取消'},{label:'确认清空',primary:true,onClick:()=>clearAll(rc)}]})}}]});
+}
+$('#resetBtn').onclick=openDataMgr;
+function renderWelcome(){const w=$('#welcome');if(!w)return;if(S.sample&&!S.welcomeClosed){w.className='welcome on';w.innerHTML=`${tic('plan',16)}<span>当前为<b>示例数据</b>，评委可直接体验全部功能；可在左下角「数据管理」清空后体验自己的内容。</span><button class="btn sm" data-dm="1">数据管理</button><button class="del" style="opacity:1" data-welcome-x="1" title="关闭">${IC.x}</button>`}else{w.className='welcome';w.innerHTML=''}}
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-dm]')){openDataMgr();return}
+  if(e.target.closest('[data-welcome-x]')){S.welcomeClosed=true;save();renderWelcome();return}
+  const c=e.target.closest('[data-click]');if(c){e.preventDefault();if(c.dataset.go)go(c.dataset.go);const t=$(c.dataset.click);if(t)setTimeout(()=>t.click(),30);return}
+  const f=e.target.closest('[data-focus]');if(f){e.preventDefault();if(f.dataset.go)go(f.dataset.go);const t=$(f.dataset.focus);if(t)setTimeout(()=>{t.scrollIntoView({block:'center'});t.focus()},30)}
+});
+ensureTypes();
 
 // ---------- demo ----------
 function setDemo(on){demo=on;$('#demoToggle').checked=on;$('#demoPanel').classList.toggle('show',on);P.last=Date.now();renderSit();if(on)toast('演示模式：时间加速 60×');}
@@ -2288,13 +2408,12 @@ window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
 let theme='auto';try{theme=localStorage.getItem('daydeck.theme')||'auto'}catch(e){}
 function applyTheme(){if(theme==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',theme);$('#themeBtn').innerHTML=IC[theme==='auto'?'auto':theme==='dark'?'moon':'sun'];$('#themeBtn').title='主题：'+({auto:'跟随系统',light:'浅色',dark:'深色'}[theme])}
 $('#themeBtn').onclick=()=>{theme={auto:'light',light:'dark',dark:'auto'}[theme];try{localStorage.setItem('daydeck.theme',theme)}catch(e){}applyTheme();toast($('#themeBtn').title)};
-$('#resetBtn').onclick=()=>showModal({title:'恢复示例数据？',icon:IC.auto.replace(/currentColor/,'#fff').replace(/18/g,'30'),html:'当前的课程、待办、提醒将被替换为预置的示例数据。',actions:[{label:'取消'},{label:'恢复',primary:true,onClick:()=>{const v=S.view;S=seed();S.view=v;save();P.mode='work';P.running=false;P.left=S.pomo.work*60;renderAll();toast('已恢复示例数据')}}]});
 
-function renderAll(){fillCatSelects();renderAI();renderDeadline();renderGlobal();renderHabits();renderStars();{const b=$('#dlBadge');if(b){const n=allDue().filter(i=>i.u==='red'||i.u==='orange').length;b.textContent=n||''}}renderNotes();renderDiary();renderReview();renderTimeline();renderOverview();renderMatrix();renderPomo();renderAlarms();renderSit();renderMealTimes();renderMeal()}
+function renderAll(){fillCatSelects();renderWelcome();renderAI();renderDeadline();renderGlobal();renderHabits();renderStars();{const b=$('#dlBadge');if(b){const n=allDue().filter(i=>i.u==='red'||i.u==='orange').length;b.textContent=n||''}}renderNotes();renderDiary();renderReview();renderTimeline();renderOverview();renderMatrix();renderPomo();renderAlarms();renderSit();renderMealTimes();renderMeal()}
 applyTheme();renderAll();updNotif();
 go(location.hash.slice(1)||S.view||'overview');
 tick();setInterval(tick,250);
-window.DayDeck={get S(){return S},renderAll:()=>renderAll(),openCatMgr,openStar,habitCheck,openPlanFor,ddlSubmit,genPlan,allDue,gv:(mode,anchor)=>{gvMode=mode||gvMode;if(anchor)gvAnchor=anchor;renderGlobal()},moveBlock,dayItems,scrollDayNow,postTodo,histDay,setDemo,demoFire,go,togglePomo,P,aiPlan:()=>runPlan(),parseNL};
+window.DayDeck={get S(){return S},openTypeMgr,openDataMgr,clearAll,restoreSample,renderAll:()=>renderAll(),openCatMgr,openStar,habitCheck,openPlanFor,ddlSubmit,genPlan,allDue,gv:(mode,anchor)=>{gvMode=mode||gvMode;if(anchor)gvAnchor=anchor;renderGlobal()},moveBlock,dayItems,scrollDayNow,postTodo,histDay,setDemo,demoFire,go,togglePomo,P,aiPlan:()=>runPlan(),parseNL};
 })();
 </script>
 </body>
